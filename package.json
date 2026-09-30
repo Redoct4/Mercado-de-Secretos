@@ -1,0 +1,20 @@
+{
+  "name": "codigo-app-mercado-de-secretos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "98.css": "^0.1.21",
+    "sqlite3": "^6.0.1"
+  },
+  "devDependencies": {
+    "electron": "^44.5.0"
+  }
+}
