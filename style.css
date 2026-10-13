@@ -1,0 +1,55 @@
+.tit {
+    text-align: center;
+}
+
+.subtitulo {
+    font-size: 28px;
+    font-style: italic;
+    margin-top: -30px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.texto {
+    font-size: 18px;
+}
+.texto label {
+    font-size: inherit;
+}
+.texto input {
+    padding:16px 5px !important;
+    font-size: inherit;
+}
+
+.instruccion {
+    font-size: 16px;
+    text-align: center;
+}
+
+.centro-prioridad {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    margin:0;
+    box-sizing: border-box;
+}
+
+.caja-login {
+    display: flex;
+    width: 450px;
+    margin:50px auto;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.caja-login div label {
+    display: inline-block;
+    width: 120px;
+    text-align: right;
+    margin-right: 5px;
+}
+.caja-login div input {
+    width: 50%;
+}
