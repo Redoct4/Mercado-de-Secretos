@@ -18,8 +18,8 @@ body {
 }
 
 .screen-window {
-    width: calc(100vw - 10vh); /* Ancho relativo a la ventana del navegador */
-    height: calc(100vh - 10vh); /* Alto relativo a la ventana del navegador */
+    width: calc(100% - 10vh); /* Ancho relativo a la ventana del navegador */
+    height: calc(100% - 10vh); /* Alto relativo a la ventana del navegador */
     margin: 0; /* Centra la ventana horizontalmente */
     transform: translateY(-1vh); /* Ajusta la posición vertical para centrar */
 }
