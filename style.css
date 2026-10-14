@@ -1,18 +1,27 @@
-.tit {
+/* ==========================================
+   1. TIPOGRAFÍA Y ESTILOS GENERALES DE TEXTO
+   ========================================== */
+h1 {
     text-align: center;
 }
 
 .subtitulo {
     font-size: 28px;
     font-style: italic;
-    margin-top: -30px;
+    margin-top: -40px;
     text-align: center;
-    margin-bottom: 60px;
 }
 
 .texto {
     font-size: 18px;
 }
+
+.instruccion {
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Estilos aplicados a cada fila contenedora de los inputs */
 .texto label {
     font-size: inherit;
 }
@@ -21,28 +30,17 @@
     font-size: inherit;
 }
 
-.instruccion {
-    font-size: 16px;
-    text-align: center;
-}
-
-.centro-prioridad {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    margin:0;
-    box-sizing: border-box;
-}
-
+/* ==========================================
+   3. COMPONENTE: CAJA DE LOGIN Y FILAS
+   ========================================== */
 .caja-login {
     display: flex;
     width: 450px;
     margin:50px auto;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 20px;
+    position-anchor: center !important;
+    object-position: 0% 50% !important;
 }
 .caja-login div label {
     display: inline-block;
@@ -52,4 +50,20 @@
 }
 .caja-login div input {
     width: 50%;
+}
+
+/* ==========================================
+   SECCIONES SUP, CENT Y INF
+   ========================================== */
+.seccion-central {
+    position: absolute;
+    top: 50%;          /* Lo empuja exactamente al 50% de la altura de la ventana */
+    left: 50%;         /* Lo empuja al 50% del ancho */
+    transform: translate(-50%, -50%); /* Lo centra perfectamente */
+}
+
+.seccion-inferior {
+    display: flex;
+    margin-bottom: 10px;
+    margin-top: auto; /* Empuja este bloque automáticamente hasta la parte inferior */
 }

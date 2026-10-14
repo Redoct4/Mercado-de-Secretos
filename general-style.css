@@ -1,0 +1,35 @@
+/* 1. Hacemos que la página ocupe toda la pantalla sin márgenes */
+body {
+    background-color: #008080;
+    height: 100vh;
+    overflow: hidden; /* Evita barras de desplazamiento innecesarias */
+}
+
+    /* 2. Forzamos a la ventana de 98.css a cubrir toda la pantalla */
+.window {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: flex-start; /* Alinea los elementos de la ventana desde arriba */
+}
+
+.screen-window {
+    position: absolute;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 92vw; /* Ancho relativo a la ventana del navegador */
+    height: 92vh; /* Alto relativo a la ventana del navegador */
+}
+
+    /* 3. El cuerpo de la ventana actúa como organizador vertical */
+.window-body {
+    position: relative; /* Necesario para posicionar la sección central */
+    height: 100%; /* Ocupa toda la altura de la ventana */
+    box-sizing: border-box;
+    padding: 20px; /* Espaciado interno para que el contenido no toque los bordes */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente los elementos */
+}
