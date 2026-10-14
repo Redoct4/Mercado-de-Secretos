@@ -15,9 +15,9 @@ body {
 
 .screen-window {
     position: absolute;
-    top: 49%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -51%);
 
     width: 92vw; /* Ancho relativo a la ventana del navegador */
     height: 92vh; /* Alto relativo a la ventana del navegador */
