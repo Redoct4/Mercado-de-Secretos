@@ -2,7 +2,11 @@
 body {
     background-color: #008080;
     height: 100vh;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente la ventana */
+    align-items: center;     /* Centra verticalmente la ventana */
     overflow: hidden; /* Evita barras de desplazamiento innecesarias */
+    margin: 0; /* Elimina márgenes predeterminados del navegador */
 }
 
     /* 2. Forzamos a la ventana de 98.css a cubrir toda la pantalla */
@@ -14,13 +18,10 @@ body {
 }
 
 .screen-window {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -51%);
-
-    width: 92vw; /* Ancho relativo a la ventana del navegador */
-    height: 92vh; /* Alto relativo a la ventana del navegador */
+    width: calc(100vw - 10vh); /* Ancho relativo a la ventana del navegador */
+    height: calc(100vh - 10vh); /* Alto relativo a la ventana del navegador */
+    margin: 0; /* Centra la ventana horizontalmente */
+    transform: translateY(-1vh); /* Ajusta la posición vertical para centrar */
 }
 
     /* 3. El cuerpo de la ventana actúa como organizador vertical */
