@@ -1,69 +1,202 @@
 /* ==========================================
    1. TIPOGRAFÍA Y ESTILOS GENERALES DE TEXTO
    ========================================== */
+:root {
+    /* textsizes */
+    --texto-font-size: 1rem;
+    --h1-font-size: 4.5rem;
+    --h2-font-size: 3.5rem;
+    --h3-font-size: 2.5rem;
+    --subtitulo-font-size: 1.5rem;
+    --importanttext-font-size: 1.2rem;
+    --smalltext-font-size: 0.9rem;
+
+    --b1-font-size: 1.8rem;
+    --b2-font-size: 1.5rem;
+    --b3-font-size: 1.3rem;
+    --b4-font-size: 1rem;
+
+    /* inputs */
+    --checkbox-size: calc(var(--smalltext-font-size) + 0.3rem);
+    --checkmark-size: calc(var(--checkbox-size) / 2);
+    --checkmark-position: calc(-1 * (var(--checkmark-size) * 1.2));
+}
+
 h1 {
+    font-size: var(--h1-font-size);
     text-align: center;
 }
 
 .subtitulo {
-    font-size: 28px;
+    font-size: var(--subtitulo-font-size);
     font-style: italic;
     margin-top: -40px;
     text-align: center;
 }
 
 .texto {
-    font-size: 18px;
+    font-size: var(--texto-font-size);
 }
 
-.instruccion {
-    font-size: 16px;
+.small-text {
+    font-size: var(--smalltext-fontsize);
     text-align: center;
 }
 
-/* Estilos aplicados a cada fila contenedora de los inputs */
-.texto label {
-    font-size: inherit;
+/* ==========================================
+   3. INPUTS
+   ========================================== */
+
+/* Buttons */
+button {
+    margin: 0.5rem;
 }
-.texto input {
-    padding:16px 5px !important;
+button.b1 {
+    font-size: var(--b1-font-size);
+    padding: 1.5rem 2rem 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 20px !important;
+}
+
+button.b2 {
+    font-size: var(--b2-font-size);
+    padding: 1.2rem 1.8rem 0.9rem;
+    font-weight: bold;
+}
+
+button.b3 {
+    font-size: var(--b3-font-size);
+    padding: 0.9rem 1.5rem 0.7rem;
+    font-style: italic;
+}
+
+/* Textbox */
+.textbox {
+    font-size: var(--importanttext-font-size);
+}
+.textbox label {
+    font-size: inherit;
+    font-weight: bold;
+}
+.textbox input {
+    padding: 1.1rem 0.3rem 0.9rem !important;
     font-size: inherit;
 }
 
+/* Checkbox */
+.caja-login .checkbox {
+    font-size: var(--smalltext-font-size);
+    margin: 3rem 0 0 0;
+    justify-content: center;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+}
+.checkbox label {
+   font-size: inherit;
+   padding-left: 0.5rem !important;
+}
+.checkbox input + label::before {
+    width: var(--checkbox-size) !important;
+    height: var(--checkbox-size) !important;
+    background-size: contain !important;
+}
+.checkbox input:checked + label::after {
+    width: var(--checkmark-size) !important;
+    height: var(--checkmark-size) !important;
+    background-size: contain !important;
+    position: absolute;
+    left: var(--checkmark-position);
+}
+
+
 /* ==========================================
-   3. COMPONENTE: CAJA DE LOGIN Y FILAS
+   3. CONJUNTO DE ELEMENTOS
    ========================================== */
 .caja-login {
     display: flex;
-    width: 450px;
-    margin:50px auto;
+    max-width: 30vw;
+    min-width: 400px;
     flex-direction: column;
-    gap: 10px;
-    position-anchor: center !important;
-    object-position: 0% 50% !important;
+    gap: 0.6rem;
+    align-items: center;
+    margin: 0 0 3rem 0;
 }
-.caja-login div label {
+.caja-login p.texto {
+    text-align: center;
+}
+.caja-login .user-password {
+    display: inherit;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: inherit;
+    gap: inherit;
+}
+.caja-login .user-password div[class="textbox"] {
+    display: inline-flex;
+    align-self: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.caja-login .user-password div[class="textbox"] label {
     display: inline-block;
-    width: 120px;
+    width: 30%;
     text-align: right;
-    margin-right: 5px;
 }
-.caja-login div input {
-    width: 50%;
+.caja-login div[class="textbox"] input {
+    width: calc(70% - 0.5rem);
+}
+
+.button-column {
+    display: flex;
+    flex-direction: column;
+}
+.button-column button {
+    width: 15rem !important;
+    padding-inline: 0 !important;
+}
+
+/* ==========================================
+   IMGS
+   ========================================== */
+
+.h1-title {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: var(--h3-font-size);
+}
+.h1-title img {
+    width: var(--h1-font-size);
+    height: var(--h1-font-size);
+}
+.h1-title img[class="home-title-icon"] {
+    transform: translate(-0.3rem, -0.6rem);
 }
 
 /* ==========================================
    SECCIONES SUP, CENT Y INF
    ========================================== */
+.seccion-superior {
+    margin-top: -1rem;
+    
+}
+
 .seccion-central {
-    position: absolute;
-    top: 50%;          /* Lo empuja exactamente al 50% de la altura de la ventana */
-    left: 50%;         /* Lo empuja al 50% del ancho */
-    transform: translate(-50%, -50%); /* Lo centra perfectamente */
+    position: static; /* Quitamos el absolute que causa el traslape */
+    transform: none;  /* Removemos el centrado forzado por coordenadas */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
 }
 
 .seccion-inferior {
     display: flex;
-    margin-bottom: 10px;
-    margin-top: auto; /* Empuja este bloque automáticamente hasta la parte inferior */
+    margin-bottom: 2vh;
 }

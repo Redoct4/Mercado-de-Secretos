@@ -1,3 +1,7 @@
+html {
+    font-size: 18px;
+}
+
 /* 1. Hacemos que la página ocupe toda la pantalla sin márgenes */
 body {
     background-color: #008080;
@@ -5,7 +9,7 @@ body {
     display: flex;
     justify-content: center; /* Centra horizontalmente la ventana */
     align-items: center;     /* Centra verticalmente la ventana */
-    overflow: hidden; /* Evita barras de desplazamiento innecesarias */
+    overflow: auto; /* Evita barras de desplazamiento innecesarias */
     margin: 0; /* Elimina márgenes predeterminados del navegador */
 }
 
@@ -22,15 +26,29 @@ body {
     height: calc(100% - 10vh); /* Alto relativo a la ventana del navegador */
     margin: 0; /* Centra la ventana horizontalmente */
     transform: translateY(-1vh); /* Ajusta la posición vertical para centrar */
+    display: flex;
+    box-sizing: border-box;
+}
+
+.screen-window .title-bar {
+    height: 1.5rem;
+}
+.screen-window .title-bar .title-bar-text {
+    font-size: 0.8rem;
+    padding-left: 0.3rem;
 }
 
     /* 3. El cuerpo de la ventana actúa como organizador vertical */
 .window-body {
-    position: relative; /* Necesario para posicionar la sección central */
-    height: 100%; /* Ocupa toda la altura de la ventana */
-    box-sizing: border-box;
-    padding: 20px; /* Espaciado interno para que el contenido no toque los bordes */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra horizontalmente los elementos */
+    align-items: center;
+    justify-content: space-between; /* Espacia los elementos uniformemente */
+    height: 100%; /* Ocupa toda la altura disponible de la ventana */
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+img {
+    image-rendering: pixelated;
 }
