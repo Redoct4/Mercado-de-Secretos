@@ -2,13 +2,12 @@
    1. TIPOGRAFÍA Y ESTILOS GENERALES DE TEXTO
    ========================================== */
 :root {
-    /* textsizes */
     --texto-font-size: 1rem;
     --h1-font-size: 4.5rem;
     --h2-font-size: 3.5rem;
     --h3-font-size: 2.5rem;
     --subtitulo-font-size: 1.5rem;
-    --importanttext-font-size: 1.2rem;
+    --important-font-size: 1.2rem;
     --smalltext-font-size: 0.9rem;
 
     --b1-font-size: 1.8rem;
@@ -16,10 +15,15 @@
     --b3-font-size: 1.3rem;
     --b4-font-size: 1rem;
 
+    /* margins and distants */
+    --subtitulo-top-margin: -2rem;
+    --button-margin: 0.5rem;
+
     /* inputs */
-    --checkbox-size: calc(var(--smalltext-font-size) + 0.3rem);
+    --checkbox-size: 1.2em;
+    --checkbox-text-padding: calc(var(--checkbox-size) + 0.4em);
     --checkmark-size: calc(var(--checkbox-size) / 2);
-    --checkmark-position: calc(-1 * (var(--checkmark-size) * 1.2));
+    --checkmark-position: calc(0.54 * (var(--checkmark-size)));
 }
 
 h1 {
@@ -30,7 +34,7 @@ h1 {
 .subtitulo {
     font-size: var(--subtitulo-font-size);
     font-style: italic;
-    margin-top: -40px;
+    margin-top: var(--subtitulo-top-margin);
     text-align: center;
 }
 
@@ -49,64 +53,60 @@ h1 {
 
 /* Buttons */
 button {
-    margin: 0.5rem;
+    margin: var(--button-margin);
+    padding: 0.8em 2em 0.6em;
 }
 button.b1 {
     font-size: var(--b1-font-size);
-    padding: 1.5rem 2rem 1.2rem;
     font-weight: bold;
     text-transform: uppercase;
-    border: 20px !important;
 }
 
 button.b2 {
     font-size: var(--b2-font-size);
-    padding: 1.2rem 1.8rem 0.9rem;
     font-weight: bold;
 }
 
 button.b3 {
     font-size: var(--b3-font-size);
-    padding: 0.9rem 1.5rem 0.7rem;
     font-style: italic;
 }
 
 /* Textbox */
 .textbox {
-    font-size: var(--importanttext-font-size);
+    font-size: var(--important-font-size);
 }
 .textbox label {
     font-size: inherit;
     font-weight: bold;
 }
 .textbox input {
-    padding: 1.1rem 0.3rem 0.9rem !important;
+    padding: 0.9em 0.3em 0.8em !important;
     font-size: inherit;
+}
+.textbox input[type="password"]{
+    padding: 1em 0.3em 0.7em !important;
 }
 
 /* Checkbox */
-.caja-login .checkbox {
-    font-size: var(--smalltext-font-size);
-    margin: 3rem 0 0 0;
-    justify-content: center;
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-}
 .checkbox label {
-   font-size: inherit;
-   padding-left: 0.5rem !important;
+    font-size: inherit;
+    padding-left: var(--checkbox-text-padding) !important;
+    margin-left: 0 !important;
 }
-.checkbox input + label::before {
+.checkbox label span {
+    padding-top: 0.17em;
+}
+.checkbox label::before {
     width: var(--checkbox-size) !important;
     height: var(--checkbox-size) !important;
     background-size: contain !important;
+    left: 0 !important;
 }
 .checkbox input:checked + label::after {
     width: var(--checkmark-size) !important;
     height: var(--checkmark-size) !important;
     background-size: contain !important;
-    position: absolute;
     left: var(--checkmark-position);
 }
 
@@ -114,14 +114,15 @@ button.b3 {
 /* ==========================================
    3. CONJUNTO DE ELEMENTOS
    ========================================== */
+
+/* caja login */
 .caja-login {
     display: flex;
-    max-width: 30vw;
-    min-width: 400px;
+    width: 32rem;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 1rem;
     align-items: center;
-    margin: 0px 0 3rem 0;
+    margin: 0 0 5rem 0;
 }
 .caja-login p.texto {
     text-align: center;
@@ -131,7 +132,7 @@ button.b3 {
     align-self: center;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 80%;
     flex-direction: inherit;
     gap: inherit;
 }
@@ -150,13 +151,22 @@ button.b3 {
 .caja-login div[class="textbox"] input {
     width: calc(70% - 0.5rem);
 }
+.caja-login .checkbox {
+    font-size: var(--smalltext-font-size);
+    margin: 3rem 0 0 0;
+    justify-content: center;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+}
 
+/* button column*/
 .button-column {
     display: flex;
     flex-direction: column;
 }
 .button-column button {
-    width: 15rem !important;
+    width: 18rem !important;
     padding-inline: 0 !important;
 }
 
@@ -164,19 +174,27 @@ button.b3 {
    IMGS
    ========================================== */
 
-.h1-title {
+.h-title {
     display: inline-flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: var(--h3-font-size);
 }
-.h1-title img {
+.h-title img {
     width: var(--h1-font-size);
     height: var(--h1-font-size);
 }
-.h1-title img[class="home-title-icon"] {
+.h-title img[class="home-title-icon"] {
     transform: translate(-0.3rem, -0.6rem);
+}
+
+.home-gif {
+    position: absolute;
+    transform: scale(20);
+    top: 50%;
+    left: 15%;
+    transform: translate(-50%, -50%) scale(10);
 }
 
 /* ==========================================
