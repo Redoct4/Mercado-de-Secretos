@@ -3,14 +3,16 @@ html {
 }
 
 /* 1. Hacemos que la página ocupe toda la pantalla sin márgenes */
-body {
+body, .page {
     background-color: #008080;
     height: 100vh;
+    width: 100vw;
     display: flex;
     justify-content: center; /* Centra horizontalmente la ventana */
     align-items: center;     /* Centra verticalmente la ventana */
     overflow: auto; /* Evita barras de desplazamiento innecesarias */
     margin: 0; /* Elimina márgenes predeterminados del navegador */
+    padding: 0;
 }
 
     /* 2. Forzamos a la ventana de 98.css a cubrir toda la pantalla */
