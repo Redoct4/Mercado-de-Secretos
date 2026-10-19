@@ -79,7 +79,6 @@ button.b1 {
 button.b2 {
     font-size: var(--b2-font-size);
     font-weight: bold;
-    text-transform: uppercase;
 }
 
 button.b3 {
@@ -101,6 +100,12 @@ button.b3 {
 }
 .textbox input[type="password"]{
     padding: 1em 0.3em 0.7em !important;
+}
+
+textarea {
+    font-size: var(--important-font-size);
+    padding: 0.7em 1em;
+    line-height: 1.5;
 }
 
 /* Checkbox */
@@ -258,8 +263,40 @@ button.b-img3 {
     }
 }
 
+.back-button button {
+    padding: 0.5em 1.5em 0.3em;
+}
+
+/* Publicar secretos */
+.pub-secre-secc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.pub-secre-textbox {
+    textarea {
+        width: 70rem;
+        height: 20rem;
+        max-width: 80rem;
+        max-height: 25rem;
+        min-width: 30rem;
+        min-height: 8rem;
+    }
+    textarea::placeholder {
+        font-style: italic;
+    }
+
+    p {
+        font-size: var(--smalltext-font-size);
+        text-align: right;
+        padding-right: 0.3em;
+    }
+}
+
 /* ==========================================
-   IMGS
+    IMGS
    ========================================== */
 
 .h-title {

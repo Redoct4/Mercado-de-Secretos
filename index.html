@@ -18,7 +18,7 @@
 
     <div class="window screen-window">
       <div class="title-bar">
-        <div class="title-bar-text">MERCADO DE SECRETOS / Inicio</div>
+        <div class="title-bar-text">MERCADO DE SECRETOS</div>
       </div>
 
       <div class="window-body tercias">
@@ -39,7 +39,7 @@
             <div class="user-password">
               <div class="textbox">
                 <label for="user">Usuario:</label>
-                <input id="user" type="text"/>
+                <input id="user" type="text" maxlength="15"/>
               </div>
 
               <div class="textbox">
@@ -80,7 +80,7 @@
 
     <div class="window screen-window">
       <div class="title-bar">
-        <div class="title-bar-text">MERCADO DE SECRETOS / Dashboard</div>
+        <div class="title-bar-text">MERCADO DE SECRETOS / Inicio</div>
       </div>
 
       <div class="window-body">
@@ -139,41 +139,39 @@
     PUBLICAR SECRETO
   ========================================== -->
 
-  <div id="page-dashboard" class="page">
+  <div id="page-publicar-secreto" class="page">
 
     <div class="window screen-window">
       <div class="title-bar">
-        <div class="title-bar-text">MERCADO DE SECRETOS / Dashboard</div>
+        <div class="title-bar-text">MERCADO DE SECRETOS / Inicio / Publicar secreto</div>
       </div>
 
       <div class="window-body">
 
         <div class="seccion-superior">
-          <h2>¡Bienvenido!</h2>
-          <p class="subtitulo">Publica, lee o consulta tus secretos.</p>
+          <h2>Publica un secreto</h2>
+          <p class="subtitulo">Escribe un secreto anónimo para que alguien más lo lea.</p>
         </div>
         
         <div class = "seccion-cuerpo">
           
-          <div class = "dashboard-buttons">
+          <div class = "pub-secre-secc">
 
-            <div class ="dashboard-buttons-primary">
+            <div class ="pub-secre-textbox">
 
-              <button class="b-img1" id="ir-publicar-secreto">
-                <img src="imgs/write.png">
-                <span>Publica un secreto</span>
-              </button>
+              <textarea 
+                class="pub-secre-input" 
+                id="pub-secre-input" 
+                placeholder="Escribe un secreto. Nadie sabrá que fuiste tú..."
+                maxlength="1200"
+              ></textarea>
 
-              <button class="b-img1" id="ir-leer-secreto">
-                <img src="imgs/read.png">
-                <span>Lee un secreto</span>
-              </button>
+              <p>0 / 1400</p>
 
             </div>
 
-            <button class="b-img3" id="ir-consultar-secretos">
-              <img src="imgs/consult.png">
-              <span>Consulta tus secretos</span>
+            <button class="b1" id="publicar-secreto">
+              <span>Publicar</span>
             </button>
 
           </div>
@@ -182,12 +180,11 @@
 
         <div class="acciones-inferiores">
 
-          <div class="exit-button">
-            <p>¡Recuerda cerrar sesión!</p>
-            <button class="b1" id="salir">Salir</button>
+          <div class="back-button">
+            <button class="b2" id="regresar-pub-secre">Atrás</button>
           </div>
 
-          <button class="b-img2" id="?-dashboard">
+          <button class="b-img2" id="?-pub-secre">
             <img src="imgs/help.png">
           </button>
 
