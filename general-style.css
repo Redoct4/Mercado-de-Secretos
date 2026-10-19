@@ -45,10 +45,12 @@ body, .page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; /* Espacia los elementos uniformemente */
     height: 100%; /* Ocupa toda la altura disponible de la ventana */
     box-sizing: border-box;
     padding: 1rem;
+}
+.window-body.tercias {
+    justify-content: space-between;
 }
 
 img {
