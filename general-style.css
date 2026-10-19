@@ -48,6 +48,8 @@ body, .page {
     height: 100%; /* Ocupa toda la altura disponible de la ventana */
     box-sizing: border-box;
     padding: 1rem;
+
+    isolation: isolate;
 }
 .window-body.tercias {
     justify-content: space-between;

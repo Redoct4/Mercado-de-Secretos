@@ -325,7 +325,9 @@ button.b-img3 {
     align-items: end;
     justify-content: space-between;
     bottom: var(--margin-acciones);
-    width: calc(100% - (var(--margin-acciones) * 2))
+    width: calc(100% - (var(--margin-acciones) * 2));
+
+    z-index: -1;
 }
 
 /* ==========================================
