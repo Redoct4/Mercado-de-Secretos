@@ -337,6 +337,35 @@ button.b-img3 {
     }
 }
 
+/* Consultar secretos */
+.lista-mis-secretos {
+    width: 72rem;
+    height: 32rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-bottom: 3rem;
+    padding: 1rem;
+    padding-right: 2rem;
+}
+.mi-secreto-item {
+    font-size: var(--b2-font-size);
+    text-align: left;
+    padding-left: 1em;
+    display: flex;
+    width: 100%;
+    height: fit-content;
+
+    margin-bottom: 1rem;
+
+    .mi-secreto-texto {
+        line-clamp: 2;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
 /* ==========================================
     IMGS
    ========================================== */
