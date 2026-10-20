@@ -5,7 +5,7 @@
     --texto-font-size: 1rem;
     --h1-font-size: 4.5rem;
     --h2-font-size: 3.5rem;
-    --h3-font-size: 2.5rem;
+    --h3-font-size: 3rem;
     --subtitulo-font-size: 1.5rem;
     --important-font-size: 1.2rem;
     --smalltext-font-size: 0.85rem;
@@ -61,6 +61,29 @@ h3 {
     text-align: center;
 }
 
+/* ==========================================
+    3. ELEMENTOS
+   ========================================== */
+
+.lista-elementos {
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-bottom: 3rem;
+    padding: 1rem;
+    padding-right: 2rem;
+    justify-items: center;
+}
+.lista-elementos:not(:has(*)) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.lista-elementos:not(:has(*))::before {
+    font-style: italic;
+    text-align: center;
+    margin: auto;
+    font-size: var(--important-font-size);
+}
 
 /* ==========================================
     3. INPUTS
@@ -103,10 +126,13 @@ button.b3 {
     padding: 1em 0.3em 0.7em !important;
 }
 
-textarea, .field-border-disabled {
+/*areas de texto grandes*/
+textarea, .field-border, .field-border-disabled {
     font-size: var(--important-font-size);
     padding: 0.7em 1em;
     line-height: 1.5;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 textarea::placeholder {
     font-style: italic;
@@ -341,13 +367,12 @@ button.b-img3 {
 .lista-mis-secretos {
     width: 72rem;
     height: 32rem;
-    overflow-x: hidden;
-    overflow-y: auto;
-    margin-bottom: 3rem;
-    padding: 1rem;
-    padding-right: 2rem;
 }
-.mi-secreto-item {
+.lista-mis-secretos:not(:has(*))::before {
+    content: "Aún no tienes secretos publicados.";
+}
+
+button.mi-secreto-item {
     font-size: var(--b2-font-size);
     text-align: left;
     padding-left: 1em;
@@ -357,13 +382,38 @@ button.b-img3 {
 
     margin-bottom: 1rem;
 
-    .mi-secreto-texto {
+    .mi-secreto-item-texto {
         line-clamp: 2;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
+}
+
+/* Mi secreto */
+.mi-secre-texto {
+    font-size: var(--texto-font-size);
+    width: 70rem;
+    height: 10rem;
+    margin-bottom: 1rem;
+}
+.lista-mi-secre-respuestas {
+    width: 70rem;
+    height: 16rem;
+}
+.lista-mi-secre-respuestas:not(:has(*))::before {
+    content: "Aún no te han respondido.";
+}
+.respuesta-mi-secre-item {
+    font-size: var(--important-font-size);
+    text-align: left;
+    padding-left: 1em;
+    display: flex;
+    width: calc(100% - 4rem);
+    height: fit-content;
+
+    margin: 1rem 0 1.7rem;
 }
 
 /* ==========================================
@@ -422,6 +472,7 @@ button.b-img3 {
     flex-direction: column;
     height: 100%;
     justify-content: center;
+    align-items: center;
     margin-bottom: 2rem;
 }
 
