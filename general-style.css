@@ -23,21 +23,37 @@ body, .page {
     justify-content: flex-start; /* Alinea los elementos de la ventana desde arriba */
 }
 
-.screen-window {
-    width: calc(100% - 10vh); /* Ancho relativo a la ventana del navegador */
-    height: calc(100% - 10vh); /* Alto relativo a la ventana del navegador */
-    margin: 0; /* Centra la ventana horizontalmente */
-    transform: translateY(-1vh); /* Ajusta la posición vertical para centrar */
-    display: flex;
-    box-sizing: border-box;
+.page {
+    > .window {
+        width: calc(100% - 10vh); /* Ancho relativo a la ventana del navegador */
+        height: calc(100% - 10vh); /* Alto relativo a la ventana del navegador */
+        margin: 0; /* Centra la ventana horizontalmente */
+        transform: translateY(-1vh); /* Ajusta la posición vertical para centrar */
+        display: flex;
+        box-sizing: border-box;
+
+        > .title-bar {
+            height: 1.5rem;
+
+            > .title-bar-text {
+                font-size: 0.8rem;
+                padding-left: 0.3rem;
+            }
+        }
+
+        > .window-body {
+            height: 100%;
+        }
+    }
 }
 
-.screen-window .title-bar {
-    height: 1.5rem;
-}
-.screen-window .title-bar .title-bar-text {
-    font-size: 0.8rem;
-    padding-left: 0.3rem;
+.emergent-window {
+    > .window {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
 
     /* 3. El cuerpo de la ventana actúa como organizador vertical */
@@ -45,7 +61,6 @@ body, .page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%; /* Ocupa toda la altura disponible de la ventana */
     box-sizing: border-box;
     padding: 1rem;
 
