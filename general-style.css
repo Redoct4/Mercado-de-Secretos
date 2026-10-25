@@ -23,6 +23,7 @@ body, .page {
     justify-content: flex-start; /* Alinea los elementos de la ventana desde arriba */
 }
 
+
 .page {
     > .window {
         width: calc(100% - 10vh); /* Ancho relativo a la ventana del navegador */
@@ -33,15 +34,11 @@ body, .page {
         box-sizing: border-box;
 
         > .title-bar {
-            height: 1.5rem;
-
-            > .title-bar-text {
-                font-size: 0.8rem;
-                padding-left: 0.3rem;
-            }
+            height: 1.7rem;
         }
 
         > .window-body {
+            padding: 1rem;
             height: 100%;
         }
     }
@@ -53,6 +50,42 @@ body, .page {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+
+        width: clamp(300px, 25vw, 80vw);
+
+        > .title-bar {
+            height: 1.2rem;
+        }
+
+        > .window-body {
+            padding: 1rem;
+        }
+    }
+}
+
+.title-bar {
+    container-type: size;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title-bar-text {
+    font-size: 85cqh;
+    padding: 20cqh 25cqh 0cqh;
+}
+.title-bar-controls {
+    height: 95cqh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button {
+        height: 100%;
+        aspect-ratio: 1/1;
+        background-position: center !important;
+        background-size: 60%;
+
+        margin-right: 0;
     }
 }
 
@@ -62,7 +95,6 @@ body, .page {
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    padding: 1rem;
 
     isolation: isolate;
 }

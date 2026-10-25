@@ -52,8 +52,9 @@ h3 {
     text-align: center;
 }
 
-.texto {
+p, .texto {
     font-size: var(--texto-font-size);
+    line-height: 1.5;
 }
 
 .small-text {
@@ -108,6 +109,9 @@ button.b2 {
 button.b3 {
     font-size: var(--b3-font-size);
     font-style: italic;
+}
+button.b4 {
+    font-size: var(--b4-font-size);
 }
 
 /* Textbox */
@@ -487,6 +491,49 @@ button.mi-secreto-item {
     width: calc(100% - (var(--margin-acciones) * 2));
 
     z-index: -1;
+}
+
+/* Ventana emergente sin título */
+
+.seccion-texto-emergent {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+    margin-right: auto;
+
+    > img {
+        width: 3rem;
+        height: 3rem;
+        margin-right: 1rem;
+    }
+
+    > p {
+        margin: 0;
+        margin-bottom: 1rem;
+        overflow-wrap: anywhere;
+    }
+}
+
+
+.emergent-actions {
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: -0.7rem;
+    margin-bottom: -0.5rem;
+
+    display: flex;
+    align-items: end;
+    justify-content: right;
+
+    gap: 0.5rem;
+
+    > button {
+        padding: 0.5em 1.5em;
+        margin: 0rem;
+
+        width: clamp(7em, 7em, 30%);    
+    }
 }
 
 /* ==========================================
