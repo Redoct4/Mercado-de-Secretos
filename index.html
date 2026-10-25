@@ -81,9 +81,7 @@
 
   <!-- VENTANA EMERGENTE - CREANDO CUENTA -->
 
-  <div>
-
-    <div id="window-creando-cuenta" class="emergent-window">
+  <div id="window-creando-cuenta" class="emergent-window" style="display: none;">
 
     <div class="window">
       <div class="title-bar">
@@ -95,14 +93,46 @@
 
       <div class="window-body">
 
-        <div class = "seccion-texto-emergent">
+        <div class = "seccion-cuerpo-emergent">
           <img src="imgs/creating-account.png">
-          <p>Este usuario y contraseña no existen.<br> <b>¿Quieres crear una nueva cuenta?</b></p>
+          <div class="seccion-cuerpo-emergent-text">
+            <p>Este usuario y contraseña no existen.<br> <b>¿Quieres crear una nueva cuenta?</b> </p>
+          </div>
         </div>
 
         <div class="emergent-actions">
           <button id="creando-cuenta-ACEPTAR" class="b4">Aceptar</button>
           <button id="creando-cuenta-CANCELAR" class="b4">Cancelar</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VENTANA EMERGENTE - RECORDAR CUENTA -->
+
+  <div id="window-recordar-cuenta" class="emergent-window">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Recuerda tu cuenta</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class = "seccion-cuerpo-emergent">
+          <img src="imgs/warning.png">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>Debes recordar tu usuario y contraseña.<br> <b>No hay forma de recuperar tu cuenta si la olvidas.</b> </p>
+          </div>
+        </div>
+
+        <div class="emergent-actions">
+          <button id="recordar-cuenta-ACEPTAR" class="b4">Aceptar</button>
         </div>
 
       </div>
@@ -397,6 +427,55 @@
             <img src="imgs/help.png">
           </button>
 
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==========================================
+    VENTANAS DE AYUDA
+  ========================================== */ -->
+
+  <!-- Ventana de ayuda - Inicio -->
+
+  <div>
+
+    <div id="?window-inicio" class="emergent-window big-emergent-window" style="display: none;">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Ayuda</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class="seccion-superior">
+          <h4 style="font-weight: normal;">¿Qué es el<br><b>MERCADO DE SECRETOS</b>?</h4>
+        </div>
+
+        <div class = "seccion-cuerpo-emergent">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>Mercado de Secretos es una aplicación donde podrás compartir secretos o confesiones que quisieras externar, mientras que también podrás “comentar” en los de otras personas. <b>Todo es completamente anónimo.</b></p>
+            <ul class="lista-imgs">
+              <li class="con-icono" style="--icono: url('imgs/users_key.png')">Para entrar, <b>crea un usuario y contraseña</b>. Debes recordarlos para poder iniciar sesión después.</li>
+              <li class="con-icono" style="--icono: url('imgs/write.png')">Una vez dentro, podrás publicar secretos, y leer unos seleccionados al azar.</li>
+              <li class="con-icono" style="--icono: url('imgs/exchange_message.png')">Para leer un secreto, debes haber publicado uno a cambio.</li>
+              <li class="con-icono" style="--icono: url('imgs/note.png')">Cuando leas un secreto, tienes la posibilidad de contestar si lo deseas.</li>
+              <li class="con-icono" style="--icono: url('imgs/consult.png')">También, podrás consultar los secretos que has publicado, así como las respuestas que has recibido.</li>
+              <li class="con-icono" style="--icono: url('imgs/warning.png')">Al final, <b>¡recuerda cerrar sesión!</b></li>
+              <li class="con-icono" style="--icono: url('imgs/smile.png')">¡Regresa cuando quieras para revisar el estado de tus secretos!</li>
+            </ul>
+          </div>
+          
+        </div>
+
+        <div class="emergent-actions">
+          <button id="creando-cuenta-ACEPTAR" class="b4">Aceptar</button>
         </div>
 
       </div>

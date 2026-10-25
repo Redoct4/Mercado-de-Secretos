@@ -6,6 +6,7 @@
     --h1-font-size: 4.5rem;
     --h2-font-size: 3.5rem;
     --h3-font-size: 3rem;
+    --h4-font-size: 2.1rem;
     --subtitulo-font-size: 1.5rem;
     --important-font-size: 1.2rem;
     --smalltext-font-size: 0.85rem;
@@ -44,6 +45,10 @@ h3 {
     font-size: var(--h3-font-size);
     text-align: center;
 }
+h4 {
+    font-size: var(--h4-font-size);
+    text-align: center;
+}
 
 .subtitulo {
     font-size: var(--subtitulo-font-size);
@@ -52,7 +57,7 @@ h3 {
     text-align: center;
 }
 
-p, .texto {
+p, li, .texto {
     font-size: var(--texto-font-size);
     line-height: 1.5;
 }
@@ -447,6 +452,46 @@ button.mi-secreto-item {
     transform: translate(-50%, -50%) scale(10);
 }
 
+.emoji {
+    height: 1.2em;
+    width: auto;
+    vertical-align: -0.2em;
+}
+
+.lista-imgs {
+    --icon-list-size: 1.5em;
+    --icon-padding: calc(var(--icon-list-size) - (var(--icon-list-size) / 4));
+    --icon-list-text-padding: calc(var(--icon-list-size) + (var(--icon-list-size) / 4));
+
+    list-style: disc;
+    padding-left: calc(5em + (var(--icon-list-size) / 2));
+
+    > li {
+        margin-bottom: 0.7em;
+        padding-left: calc(var(--icon-padding));
+    }
+
+    > li.con-icono {
+        list-style: none;
+        padding-left: 0;
+
+        position: relative;
+        padding-left: var(--icon-list-text-padding);
+        margin-left: calc(var(--icon-padding) * -1);
+    }
+
+    > li.con-icono::before {
+        content: "";
+        position: absolute;
+        left: calc(var(--icon-list-size) - 2em);
+        top: 0em;                 /* ajusta para alinear con la primera línea */
+        width: var(--icon-list-size);               /* escala con el texto */
+        height: var(--icon-list-size);
+        background: var(--icono) no-repeat center / contain;
+        image-rendering: pixelated; /* para pixel art */
+    }
+}
+
 /* ==========================================
    SECCIONES
    ========================================== */
@@ -495,12 +540,14 @@ button.mi-secreto-item {
 
 /* Ventana emergente sin título */
 
-.seccion-texto-emergent {
+.seccion-cuerpo-emergent {
     display: flex;
     flex-direction: row;
     height: 100%;
 
+    margin-top: 0;
     margin-right: auto;
+    margin-bottom: 0rem;
 
     > img {
         width: 3rem;
@@ -508,10 +555,12 @@ button.mi-secreto-item {
         margin-right: 1rem;
     }
 
-    > p {
-        margin: 0;
-        margin-bottom: 1rem;
-        overflow-wrap: anywhere;
+    > .seccion-cuerpo-emergent-text {
+        > p, ul {
+            margin: 0;
+            margin-bottom: 1rem;
+            overflow-wrap: anywhere;
+        }
     }
 }
 
@@ -533,6 +582,14 @@ button.mi-secreto-item {
         margin: 0rem;
 
         width: clamp(7em, 7em, 30%);    
+    }
+}
+
+/* Ventana emergente de ayuda u otros con título */
+.emergent-window {
+    h1, h2, h3, h4 {
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
     }
 }
 

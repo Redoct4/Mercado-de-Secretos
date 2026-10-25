@@ -63,6 +63,14 @@ body, .page {
     }
 }
 
+.big-emergent-window .window {
+    width: clamp(500px, 50vw, 87vw);
+
+    > .window-body {
+        padding: 1.5rem;
+    }
+}
+
 .title-bar {
     container-type: size;
     display: flex;
