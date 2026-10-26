@@ -1,5 +1,5 @@
 html {
-    font-size: 1.7vh;
+    font-size: clamp(10px, 1.7vh, 1.7vh);
 }
 
 /* 1. Hacemos que la página ocupe toda la pantalla sin márgenes */
