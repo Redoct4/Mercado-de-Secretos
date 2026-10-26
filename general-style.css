@@ -79,6 +79,7 @@ body, .page {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    min-height: 9px;
 }
 
 .title-bar-text {
