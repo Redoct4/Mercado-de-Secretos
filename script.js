@@ -49,8 +49,8 @@ function contrasenaCorrecta(usuario, contrasena) {
     return baseFalsa.cuentas.get(usuario) === contrasena;
 }
 
-function confirmarContraseña(contrasenaCreada, contrasenaConfirmada) {
-    return contrasenaCreada === contrasenaConfirmada
+function confirmarContraseña() {
+    return $('password').value === $('password-confirm').value
 }
 
 function crearCuentaDB(usuario, contrasena) {
@@ -97,7 +97,7 @@ function secretoAleatorio() {
     return elegido;
 }
 
-function guardarRespuestas(secreto, autor, texto) {
+function guardarRespuesta(secreto, autor, texto) {
     secreto.respuestas.push({ autor: autor, texto: texto });
 }
 
@@ -157,6 +157,13 @@ function iniciarSesion(usuario) {
     irA('page-dashboard');
 }
 
+function abrirCreandoCuenta() {
+    $('password-confirm').value = '';                    
+    $('creando-cuenta-error').classList.add('oculto');     
+    abrir('window-creando-cuenta');
+    $('confirmar-password').focus();
+}
+
 const acciones = {
 
     //----Inicio y cuenta----
@@ -177,7 +184,7 @@ const acciones = {
         }
 
         if (!cuentaExiste(usuario)) {
-            abrir('windows-creando-cuenta');
+            abrirCreandoCuenta();
             return;
         }
 
@@ -191,12 +198,14 @@ const acciones = {
     },
 
     crearCuenta() {
-        if(!confirmarContraseña($('password'), $('password-confirm'))) {
+        if(!confirmarContraseña()) {
             $('creando-cuenta-error').classList.remove('oculto');
+            $('password-confirm').focus();
             return;
         }
         $('creando-cuenta-error').classList.add('oculto');
         
+        cerrar('window-creando-cuenta');
         crearCuentaDB($('user').value.trim(), $('password').value);
         abrir('window-recordar-cuenta');
     },
@@ -245,9 +254,130 @@ const acciones = {
         $('respuesta-input').value = '';
         document.querySelector('.respuesta-texto-sec').classList.add('oculto');
 
-        irA('page-leer-secreto')
-    }
+        irA('page-leer-secreto');
+    },
 
     // ----Publicar secreto----
+    publicarSecreto() {
+        if (!publicacionValida($('pub-secre-input').value)) {
+            Mensaje('Secreto no válida', 'Por favor, escribe más para que tu secreto pueda publicarse.');
+            return;
+        }
 
+        abrir('window-publicando-secreto');
+    },
+
+    confirmarPublicar() {
+        guardarSecreto(estado.usuario, $('pub-secre-input').value.trim());
+        $('pub-secre-input').value = '';
+
+        irA('page-dashboard');
+
+        Mensaje('Secreto publicado', 'Secreto publicado exitosamente. Ya puedes leer el secreto de otra persona.', 'imgs/v.png');
+    },
+
+    regresarPublicar() {
+        if ($('pub-secre-input').value.trim() !== '') {
+            abrir('window-regresar-dashboard-publicar');
+            return;
+        }
+
+        irA('page-dashboard');
+    },
+
+    salirPublicar() {
+        $('pub-secre-input').value = '';
+        irA('page-dashboard');
+    },
+
+    // ----- Leer secreto ------
+
+    mostrarRespuesta() {
+        $('responder-secreto').classList.add('oculto');
+        $('respuesta-input').value = '';
+        $('responder-secreto-texto').classList.remove('oculto');
+
+        $('respuesta-input').focus();
+    },
+
+    publicarRespuesta() {
+        if (!publicacionValida($('respuesta-input').value)) {
+            Mensaje('Respuesta no válida', 'Por favor, escribe más para que tu respuesta pueda publicarse.');
+            return;
+        }
+
+        abrir('window-publicando-respuesta');
+    },
+
+    confirmarRespuesta() {
+        guardarRespuesta(estado.secretoLeyendo, estado.usuario, $('respuesta-input').value.trim());
+        
+        $('responder-secreto').classList.remove('oculto');
+        $('respuesta-input').value = '';
+        $('responder-secreto-texto').classList.add('oculto');
+
+        irA('page-dashboard');
+
+        Mensaje('Respuesta publicada', 'Respuesta publicada exitosamente.', 'imgs/v.png');
+    },
+
+    salirLeer() {
+        $('responder-secreto').classList.remove('oculto');
+        $('respuesta-input').value = '';
+        $('responder-secreto-texto').classList.add('oculto');
+
+        irA('page-dashboard');
+    },
 }
+
+// ------- Eventos ---------------
+
+document.addEventListener('click', (evento) => {
+
+    const close = evento.target.closest('.emergent-window .title-bar-controls button');
+    if (close) {
+        cerrar(close.closest('.emergent-window'));
+        return;
+    }
+
+    const button = evento.target.closest('button, a[data-abrir]');
+    if(!button) return;
+    if(boton.tagName === 'A') evento.preventDefault();
+    
+    const data = button.dataset;
+
+    if('cerrar' in data)    cerrar(boton.closest('.emergent-window'));
+    if(data.ir)             irA(data.ir);
+    if(data.abrir)          abrir(data.abrir);
+    if(data.accion)         acciones[data.accion]()
+});
+
+const enterKeyAction = document.querySelectorAll('.user', '.password', '.password-confirm');
+
+enterKeyAction.forEach(el => {
+
+    el.addEventListener('keydown', (evento) => {
+        if (evento.key === 'Enter') {
+
+            if (el.classList.contains('.user')) {
+                evento.preventDefault();
+                $('password').focus();
+                return;
+            } 
+            if (el.classList.contains('.password')) {
+                acciones.entrar();
+                return;
+            }
+            if (el.classList.contains('.password-confirm')) {
+                acciones.crearCuenta();
+                return;
+            }
+            
+        }
+    })
+
+})
+
+// ------------ Arranque ---------------
+document.querySelectorAll('.page', '.emergent-window').forEach(el => el.classList.add('oculto'));
+irA('page-inicio');

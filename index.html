@@ -429,7 +429,7 @@
         </div>
 
         <div class="emergent-actions">
-          <button data-cerrar data-accion="publicarSecretoAceptar" class="b4">Aceptar</button>
+          <button data-cerrar data-accion="confirmarPublicar" class="b4">Aceptar</button>
           <button data-cerrar class="b4">Cancelar</button>
         </div>
 
@@ -501,7 +501,7 @@
                 <span>Responder...</span>
               </button>
 
-              <div class="respuesta-texto-sec">
+              <div class="respuesta-texto-sec oculto" id="responder-secreto-texto">
 
                 <textarea 
                   id="respuesta-input" 
@@ -524,7 +524,7 @@
         <div class="acciones-inferiores">
 
           <div class="back-button">
-            <button class="b2" data-accion="regresarLeer">Atrás</button>
+            <button class="b2" data-abrir="window-regresar-dashboard-responder">Atrás</button>
           </div>
 
           <button class="b-img2" data-abrir="ayuda-window-leer-secre">
@@ -555,7 +555,7 @@
         <div class = "seccion-cuerpo-emergent">
           <img src="imgs/warning.png">
           <div class="seccion-cuerpo-emergent-text">
-            <p>¿Estás seguro de publicar tu respuesta anónima a este secreto?</p>
+            <p>¿Estás seguro de publicar tu respuesta anónima a este secreto? Al publicar, se cerrará este secreto y ya no podrás acceder a él.</p>
           </div>
         </div>
 
