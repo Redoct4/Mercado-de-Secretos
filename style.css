@@ -91,6 +91,14 @@ p, li, .texto {
     font-size: var(--important-font-size);
 }
 
+ol {
+    margin-top: -1em;
+    li {
+        margin-bottom: 0.2em;
+        padding-left: 0.2em;
+    }
+}
+
 /* ==========================================
     3. INPUTS
    ========================================== */
@@ -544,6 +552,7 @@ button.mi-secreto-item {
     display: flex;
     flex-direction: row;
     height: 100%;
+    overflow: hidden;
 
     margin-top: 0;
     margin-right: auto;
@@ -560,6 +569,7 @@ button.mi-secreto-item {
             margin: 0;
             margin-bottom: 1rem;
             overflow-wrap: anywhere;
+            overflow: hidden;
         }
     }
 }
@@ -593,6 +603,21 @@ button.mi-secreto-item {
     }
 }
 
+/*¨Ventana emergente con scrollable text */
+.scrollable-cuerpo {
+    height: 20rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.4rem;
+}
+/* Barra vertical: quita la flecha "increment" del inicio y la "decrement" del final */
+.scrollable-cuerpo::-webkit-scrollbar-button:vertical:start:increment,
+.scrollable-cuerpo::-webkit-scrollbar-button:vertical:end:decrement {
+    display: none;
+}
+
 /* ==========================================
    CARACTERÍSTICAS
    ========================================== */
+
+

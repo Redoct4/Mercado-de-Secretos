@@ -112,7 +112,7 @@
 
   <!-- VENTANA EMERGENTE - RECORDAR CUENTA -->
 
-  <div id="window-recordar-cuenta" class="emergent-window">
+  <div id="window-recordar-cuenta" class="emergent-window" style="display: none;">
 
     <div class="window">
       <div class="title-bar">
@@ -139,6 +139,84 @@
     </div>
 
   </div>
+
+  <!-- VENTANA EMERGENTE - TERMINOS Y CONDICIONES -->
+
+  <div id="window-TyC" class="emergent-window big-emergent-window">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Términos y Condiciones</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class="seccion-superior">
+          <h4>Términos y Condiciones</h4>
+        </div>
+
+        <div class = "seccion-cuerpo-emergent scrollable-cuerpo sunken-panel">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>Mercado de Secretos es una instalación de arte interactiva. Al usarla, participas en un intercambio de secretos anónimo con las personas que visiten la obra. Al crear tu cuenta, aceptas que leíste y comprendiste los sigueintes puntos:</p>
+            
+            <p><b>1. ¿Cómo funciona?</b></p>
+            <ol style="list-style: lower-alpha;">
+              <li>Para leer un secreto, debes publicar uno propio.</li>
+              <li>Por cada secreto publicado, podrás acceder a uno al azar de otro usuario.</li>
+              <li>Puedes responder a secretos que leas, y otras personas podrán responder el tuyo.</li>
+              <li>Todo será anónimo. Los usuarios que publiquen jamás serán revelados.</li>
+            </ol>
+
+            <p><b>2. Privacidad</b></p>
+            <ol style="list-style: lower-alpha;">
+              <li>Los secretos y respuestas se publicarán sin tu nombre. Nadie podrá ver el usuario autor de los secretos o respuestas.</li>
+              <li>Para entrar necesitas únicamente usuario y contraseña. No se recolectan datos de identificación directa como correos, nombre, celular o similares. Te recomendamos no usar tu nombre real en tu usuario.</li>
+              <li>Todo se almacena en una base de datos local, nada se sube a internet.</li>
+              <li>En caso de recibir reportes de secretos que rompan las normas de conducta, el equipo tras la obra tiene derecho a inspeccionar la base de datos y eliminar la publicación en cuestión.</li>
+            </ol>
+
+            <p><b>3. Normas de conducta</b></p>
+            <ol style="list-style: lower-alpha;">
+              <li>Evita publicar nombres reales, matrículas, teléfonos o información sensible que permiten identificarte o a terceros.</li>
+              <li>No publiques mensajes de odio, acoso, amenazas directas o discriminación.</li>
+              <li>Secretos o respuestas que pongan en riesgo tu integridad o la de otros.</li>
+              <li>Contenido que sea altamente sensible para otros usuarios.</li>
+              <li>No publiques textos sin sentido: palabras al azar, golpes de teclado, etc. Debe tener coherencia y ser un secreto, anécdota, confesión o similar.</li>
+              <li>Evita spam y publicaciones repetidas.</li>
+              <li><b>Difundir los secretos de esta instalación queda estrictamente prohibido.</b> A menos que se desee reportar con el responsable sobre una publicación que rompa las normas.</li>
+            </ol>
+            <p>Si algún secreto incumple estas reglas, contacta con el responsable de la obra. En caso de validar que un mensaje incumplió la normas, la publicación será eliminada.</p>
+
+            <p><b>4. Si estás pasando un momento difícil</b></p>
+            <p>Esta obra no debe usarse como centro de atención psicológica. Si necesitas más ayuda o quieres compartir una situación de riesgo para ti o para otros, te invitamos a acudir con SECLIPSI u otro servicio de orientación o apoyo.</p>
+            
+            <p><b>5. Responsabilidades</b></p>
+            <ol style="list-style: lower-alpha;">
+              <li>Los secretos y respuestas son escritos por los visitantes. No hay revisión de secretos antes de su publicación y no nos hacemos responsables de su contenido.</li>
+              <li>Eres responsable de lo que escribes y publicas.</li>
+              <li>Los datos se conservarán hasta finalizar el tiempo de exposición (a menos que una situación externa suceda).</li>
+            </ol>
+
+            <p><b>6. Contacto</b></p>
+            <p>Si deseas reportar alguna publicación que infrinja estas normas, o quisieras hacer algún comentario, duda o aclaración, contacta al responsable de la obra:</p>
+            <p><b>Aldo López Malo Martínez.</b> <br> <i>Alumno de Arte Digital.</i> <br> lm202333168@alm.buap.mx</p>
+          </div>
+          
+        </div>
+
+        <div class="emergent-actions">
+          <button id="creando-cuenta-ACEPTAR" class="b4">Aceptar</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
 
   <!-- ==========================================
     DASHBOARD
@@ -440,9 +518,7 @@
 
   <!-- Ventana de ayuda - Inicio -->
 
-  <div>
-
-    <div id="?window-inicio" class="emergent-window big-emergent-window" style="display: none;">
+  <div id="?window-inicio" class="emergent-window big-emergent-window" style="display: none;">
 
     <div class="window">
       <div class="title-bar">
