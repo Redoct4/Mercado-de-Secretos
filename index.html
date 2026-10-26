@@ -142,7 +142,7 @@
 
   <!-- VENTANA EMERGENTE - TERMINOS Y CONDICIONES -->
 
-  <div id="window-TyC" class="emergent-window big-emergent-window">
+  <div id="window-TyC" class="emergent-window big-emergent-window" style="display: none;">
 
     <div class="window">
       <div class="title-bar">
@@ -208,7 +208,7 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="creando-cuenta-ACEPTAR" class="b4">Aceptar</button>
+          <button id="TyC-ACEPTAR" class="b4">Aceptar</button>
         </div>
 
       </div>
@@ -546,6 +546,48 @@
               <li class="con-icono" style="--icono: url('imgs/warning.png')">Al final, <b>¡recuerda cerrar sesión!</b></li>
               <li class="con-icono" style="--icono: url('imgs/smile.png')">¡Regresa cuando quieras para revisar el estado de tus secretos!</li>
             </ul>
+          </div>
+          
+        </div>
+
+        <div class="emergent-actions">
+          <button id="creando-cuenta-ACEPTAR" class="b4">Aceptar</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Ventana de ayuda - Dashbboard -->
+
+  <div id="?window-dashboard" class="emergent-window big-emergent-window">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Ayuda</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class="seccion-superior">
+          <h4>¡Bienvenido al Mercado de Secretos!</h4>
+        </div>
+
+        <div class = "seccion-cuerpo-emergent">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>Aquí es donde todo comienza. Selecciona alguna de las acciones principales para continuar:</p>
+            <ul class="lista-imgs">
+              <li class="con-icono" style="--icono: url('imgs/write.png')"><b>Publica un secreto:</b> Escribe un secreto para publicarlo en la base de datos y que otras personas te lean y respondan.</li>
+              <li class="con-icono" style="--icono: url('imgs/read.png')"><b>Lee un secreto:</b> Lee un secreto aleatorio de alguien más y responde si quieres.</li>
+              <li class="con-icono" style="--icono: url('imgs/consult.png')"><b>Consulta tus secretos:</b> Revisa los secretos que ya has subido y verificar si alguien ha respondido.</li>
+              <li class="con-icono" style="--icono: url('imgs/warning.png')"><b>Cierra sesión:</b> Al final, recuerda cerrar sesión.</li>
+            </ul>
+            <p>Recuerda que todo es anónimo, ¡no temas expresarte con honestidad!</p>
+            <p><i>Revisa los términos y condiciones para seguir las normas de conducta y publicación.</i></p>
           </div>
           
         </div>
