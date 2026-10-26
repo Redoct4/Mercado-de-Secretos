@@ -70,7 +70,7 @@
         <div class="seccion-inferior">
           <div class="button-column">
             <button class="b1" data-accion="entrar">Entrar</button>
-            <button class="b3" data-abrir="ayuda-inicio">¿Qué es esto?</button>
+            <button class="b3" data-abrir="ayuda-window-inicio">¿Qué es esto?</button>
           </div>
         </div>
       
@@ -98,7 +98,7 @@
           <div class="seccion-cuerpo-emergent-text">
             <p>Este usuario y contraseña no existen.<br> <b>Si quieres crear una nueva cuenta, confirma tu contraseña:</b> </p>
             <div class="textbox">
-              <label for="password">Contraseña:</label>
+              <label for="password" style="padding-bottom: 0.2rem;">Contraseña:</label>
               <input id="password-confirm" type="password" maxlength="20"/>
             </div>
             <p id="creando-cuenta-error" class="oculto" style="color: rgb(194, 20, 20); margin-bottom: 0; margin-top: 0.5rem;">
@@ -252,14 +252,14 @@
                 <span>Publica un secreto</span>
               </button>
 
-              <button class="b-img1" data-accion="IrLeerSecreto">
+              <button class="b-img1" data-accion="irLeerSecreto">
                 <img src="imgs/read.png">
                 <span>Lee un secreto</span>
               </button>
 
             </div>
 
-            <button class="b-img3" data-accion="IrConsultarSecretos">
+            <button class="b-img3" data-accion="irConsultarSecretos">
               <img src="imgs/consult.png">
               <span>Consulta tus secretos</span>
             </button>
@@ -334,7 +334,7 @@
         <div class = "seccion-cuerpo-emergent">
           <img src="imgs/x.png">
           <div class="seccion-cuerpo-emergent-text">
-            <p>Para leer otro secreto, debes publicar uno antes.</p>
+            <p>Para leer un secreto, debes publicar uno a cambio.</p>
           </div>
         </div>
 
@@ -367,9 +367,9 @@
         
         <div class = "seccion-cuerpo">
           
-          <div class = "pub-secre-secc">
+          <div class = "pub-secre-secc centered-elements">
 
-            <div class ="centered-elements">
+            <div class ="centered-elements pub-secre-textbox">
 
               <textarea 
                 class="pub-secre-input" 
@@ -378,7 +378,7 @@
                 maxlength="1400"
               ></textarea>
 
-              <p>0 / 1400</p>
+              <p id="pub-secre-input-limit">0 / 1400</p>
 
             </div>
 
@@ -491,9 +491,7 @@
           
           <div class = "centered-elements leer-secre-sec">
 
-            <div class ="leer-secre-texto field-border-disabled">
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu nulla est. Nunc fringilla tellus nisi, at tempus libero convallis eget. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum metus ligula, accumsan in neque id, gravida suscipit ligula. Donec sit amet vulputate erat, sed condimentum nisi. Morbi dignissim eros vel ante mollis pellentesque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras nec urna quis enim dictum ornare sit amet ac sapien. Praesent vitae ante sit amet lectus fermentum sagittis. Sed vitae diam id dolor commodo interdum. Integer sit amet orci pharetra, scelerisque lectus vel, dictum purus. Ut ut condimentum lectus, a vestibulum neque. Morbi vitae ex quam. Curabitur hendrerit est vel lacus elementum, at hendrerit orci porta. Aliquam sem ipsum,</span>
-            </div>
+            <div class ="leer-secre-texto field-border-disabled"><span></span></div>
 
             <div class="respuesta-sec">
               
@@ -555,7 +553,8 @@
         <div class = "seccion-cuerpo-emergent">
           <img src="imgs/warning.png">
           <div class="seccion-cuerpo-emergent-text">
-            <p>¿Estás seguro de publicar tu respuesta anónima a este secreto? Al publicar, se cerrará este secreto y ya no podrás acceder a él.</p>
+            <p><b>¿Estás seguro de publicar tu respuesta anónima a este secreto?</b></p>
+            <p>Al publicar, se cerrará este secreto y ya no podrás acceder a él.</p>
           </div>
         </div>
 
@@ -586,7 +585,8 @@
         <div class = "seccion-cuerpo-emergent">
           <img src="imgs/warning.png">
           <div class="seccion-cuerpo-emergent-text">
-            <p>El secreto que te apareció y la respuesta que estés escribiendo se perderán si sales de esta ventana. <b>¿Estás seguro de querer salir?</b></p>
+            <p>El secreto que te apareció y la respuesta que estés escribiendo se perderán si sales de esta ventana.</p>
+            <p><b>¿Estás seguro de querer salir?</b></p>
           </div>
         </div>
 
@@ -939,7 +939,7 @@
         </div>
 
         <div class="emergent-actions">
-          <button id=data-cerrar class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Aceptar</button>
         </div>
 
       </div>

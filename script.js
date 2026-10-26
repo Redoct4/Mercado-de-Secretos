@@ -24,10 +24,10 @@ function cerrar(idVentana) {
 }
 
 // Ventana emergente reutilizable
-function Mensaje(titulo, texto, icono = 'imgs/x.png') {
+function Mensaje(titulo, textoHtml, icono = 'imgs/x.png') {
     $('mensaje-titulo').textContent = titulo;
     $('mensaje-icono').src = icono;
-    $('mensaje-texto').textContent = texto;
+    $('mensaje-texto').innerHTML = textoHtml;
 
     abrir('window-mensaje')
 }
@@ -45,7 +45,9 @@ function cuentaExiste(usuario) {
     return baseFalsa.cuentas.has(usuario);
 }
 
-function contrasenaCorrecta(usuario, contrasena) {
+function contrasenaCorrecta() {
+    const usuario = $('user').value
+    const contrasena = $('password').value
     return baseFalsa.cuentas.get(usuario) === contrasena;
 }
 
@@ -75,7 +77,7 @@ function puedeLeer() {
     const usuario = estado.usuario;
 
     const leidos = baseFalsa.lecturas.get(usuario) ?? new Set();
-    return secretosDe(usuario).length > leidos.length;
+    return secretosDe(usuario).length > leidos.size;
 }
 
 function secretoAleatorio() {
@@ -102,10 +104,13 @@ function guardarRespuesta(secreto, autor, texto) {
 }
 
 // Filtro de longitud publicación y respuesta
-function publicacionValida(texto) {
+function publicacionValida(texto, minCharacters, minWords) {
     const limpio = texto.trim();
-    if (limpio.length < 20) return false;
-    if (limpio.split(/\s+/).length < 4) return false;
+    if (limpio.length < minCharacters) return false;
+
+    if (minWords) {
+        if (limpio.split(/\s+/).length < minWords) return false;
+    }
 
     return true;
 }
@@ -118,10 +123,10 @@ function dibujarMisSecretos() {
 
     secretosDe(estado.usuario).forEach(secreto => {
         const copia = plantilla.content.cloneNode(true);
-        const boton = copia.querySelector('button');
+        const button = copia.querySelector('button');
 
-        boton.querySelector('.mi-secreto-item-text').textContent = secreto.texto;
-        boton.addEventListener('click', () => abrirMiSecreto(secreto));
+        button.querySelector('.mi-secreto-item-texto').textContent = secreto.texto;
+        button.addEventListener('click', () => abrirMiSecreto(secreto));
 
         lista.appendChild(copia);
     });
@@ -143,7 +148,7 @@ function abrirMiSecreto(secreto) {
         lista.appendChild(copia);
     });
 
-    irA('page-respuesta-mi-secreto')
+    irA('page-respuestas-mi-secreto')
 }
 
 //ACCIONES
@@ -153,7 +158,7 @@ function iniciarSesion(usuario) {
     estado.usuario = usuario;
     $('password').value = '';
     $('user').value = '';
-    $('TyC').checked = false;
+    $('tyc').checked = false;
     irA('page-dashboard');
 }
 
@@ -161,7 +166,7 @@ function abrirCreandoCuenta() {
     $('password-confirm').value = '';                    
     $('creando-cuenta-error').classList.add('oculto');     
     abrir('window-creando-cuenta');
-    $('confirmar-password').focus();
+    $('password-confirm').focus();
 }
 
 const acciones = {
@@ -178,18 +183,20 @@ const acciones = {
             return;
         }
 
+        if (baseFalsa.cuentas.has($('user').value)) {
+            if (!contrasenaCorrecta()) {
+                Mensaje('Contraseña incorrecta', 'La contraseña ingresada no es correcta. Intenta de nuevo.');
+                return;
+            }
+        }
+
         if (!$('tyc').checked) {
-            Mensaje('Acepta los términos y condiciones', 'Para continuar, debes marcar la casilla de términos y condiciones.');
+            Mensaje('Acepta TyC', 'Para continuar, debes marcar la casilla de términos y condiciones.');
             return;
         }
 
         if (!cuentaExiste(usuario)) {
             abrirCreandoCuenta();
-            return;
-        }
-
-        if (!contrasenaCorrecta) {
-            Mensaje('Contraseña incorrecta', 'La contraseña ingresada no es correcta. Intenta de nuevo.');
             return;
         }
 
@@ -223,11 +230,11 @@ const acciones = {
 
         $('user').value = '';
         $('password').value = '';
-        $('TyC').checked = false;
+        $('tyc').checked = false;
         irA('page-inicio');
     },
 
-    IrConsultarSecretos() {
+    irConsultarSecretos() {
         dibujarMisSecretos();
         irA('page-consultar-secretos');
     },
@@ -241,7 +248,7 @@ const acciones = {
         const secreto = secretoAleatorio();
 
         if (secreto === null) {
-            Mensaje('Sin secretos', 'No hay secretos de otras personas o ya has leído todos los disponibles. Vuelve más tarde', 'imgs/warning.png');
+            Mensaje('Sin secretos', 'No hay secretos de otras personas o ya has leído todos los disponibles. <br> Vuelve más tarde.', 'imgs/warning.png');
             return;
         }
 
@@ -259,7 +266,7 @@ const acciones = {
 
     // ----Publicar secreto----
     publicarSecreto() {
-        if (!publicacionValida($('pub-secre-input').value)) {
+        if (!publicacionValida($('pub-secre-input').value, 20, 3)) {
             Mensaje('Secreto no válida', 'Por favor, escribe más para que tu secreto pueda publicarse.');
             return;
         }
@@ -273,7 +280,7 @@ const acciones = {
 
         irA('page-dashboard');
 
-        Mensaje('Secreto publicado', 'Secreto publicado exitosamente. Ya puedes leer el secreto de otra persona.', 'imgs/v.png');
+        Mensaje('Secreto publicado', 'Secreto publicado exitosamente. <br>Ya puedes leer el secreto de otra persona.', 'imgs/v.png');
     },
 
     regresarPublicar() {
@@ -301,7 +308,7 @@ const acciones = {
     },
 
     publicarRespuesta() {
-        if (!publicacionValida($('respuesta-input').value)) {
+        if (!publicacionValida($('respuesta-input').value, 5, null)) {
             Mensaje('Respuesta no válida', 'Por favor, escribe más para que tu respuesta pueda publicarse.');
             return;
         }
@@ -336,48 +343,48 @@ document.addEventListener('click', (evento) => {
 
     const close = evento.target.closest('.emergent-window .title-bar-controls button');
     if (close) {
-        cerrar(close.closest('.emergent-window'));
+        cerrar(close.closest('.emergent-window').id);
         return;
     }
 
     const button = evento.target.closest('button, a[data-abrir]');
     if(!button) return;
-    if(boton.tagName === 'A') evento.preventDefault();
-    
+    if(button.tagName === 'A') evento.preventDefault();
+
     const data = button.dataset;
 
-    if('cerrar' in data)    cerrar(boton.closest('.emergent-window'));
+    if('cerrar' in data)    cerrar(button.closest('.emergent-window').id);
     if(data.ir)             irA(data.ir);
     if(data.abrir)          abrir(data.abrir);
-    if(data.accion)         acciones[data.accion]()
+    if(data.accion)         acciones[data.accion]();
 });
 
-const enterKeyAction = document.querySelectorAll('.user', '.password', '.password-confirm');
+const enterKeyAction = document.querySelectorAll('#user, #password, #password-confirm');
 
 enterKeyAction.forEach(el => {
-
     el.addEventListener('keydown', (evento) => {
-        if (evento.key === 'Enter') {
+        if (evento.key !== 'Enter') return;
+        
 
-            if (el.classList.contains('.user')) {
-                evento.preventDefault();
-                $('password').focus();
-                return;
-            } 
-            if (el.classList.contains('.password')) {
-                acciones.entrar();
-                return;
-            }
-            if (el.classList.contains('.password-confirm')) {
-                acciones.crearCuenta();
-                return;
-            }
-            
+        if (el.id === 'user') {
+            evento.preventDefault();
+            $('password').focus();
+        } else if (el.id === 'password') {
+            evento.preventDefault();
+            acciones.entrar();
+        } else if (el.id === 'password-confirm') {
+            evento.preventDefault();
+            acciones.crearCuenta();
         }
-    })
+    });
+});
 
+$('pub-secre-input').addEventListener('input', (evento) => {
+    $('pub-secre-input-limit').textContent = $('pub-secre-input').value.trim().length + " / " + $('pub-secre-input').maxLength;
 })
 
 // ------------ Arranque ---------------
+$('pub-secre-input-limit').textContent = "0 / " + $('pub-secre-input').maxLength;
+
 document.querySelectorAll('.page', '.emergent-window').forEach(el => el.classList.add('oculto'));
 irA('page-inicio');
