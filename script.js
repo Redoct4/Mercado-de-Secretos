@@ -46,7 +46,7 @@ function cuentaExiste(usuario) {
 }
 
 function contrasenaCorrecta() {
-    const usuario = $('user').value
+    const usuario = $('user').value.toLowerCase();
     const contrasena = $('password').value
     return baseFalsa.cuentas.get(usuario) === contrasena;
 }
@@ -70,6 +70,21 @@ function guardarSecreto(usuario, texto) {
 
 function secretosDe(usuario) {
     return baseFalsa.secretos.filter(s => s.autor === usuario);
+}
+
+function normalizarTexto(texto) {
+    const result = texto
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, ' ')               
+        .replace(/[^\p{L}\p{N} ]/gu, '');  
+        
+    return result;
+}
+
+function secretoExiste(texto) {
+    const nuevo = normalizarTexto(texto);
+    return baseFalsa.secretos.some(s => normalizarTexto(s.texto) === nuevo);
 }
 
 // Regla 1 a 1: puedes leer mientras hayas publicado uno más de lo que has leido
@@ -169,13 +184,18 @@ function abrirCreandoCuenta() {
     $('password-confirm').focus();
 }
 
+function reiniciarPubSecreInput(){
+    $('pub-secre-input').value = '';
+    $('pub-secre-input-limit').textContent = "0 / " + $('pub-secre-input').maxLength;
+}
+
 const acciones = {
 
     //----Inicio y cuenta----
 
     entrar() {
 
-        const usuario = $('user').value.trim();
+        const usuario = $('user').value.trim().toLowerCase();
         const contrasena = $('password').value;
 
         if (usuario === '' || contrasena === '') {
@@ -183,7 +203,7 @@ const acciones = {
             return;
         }
 
-        if (baseFalsa.cuentas.has($('user').value)) {
+        if (baseFalsa.cuentas.has(usuario)) {
             if (!contrasenaCorrecta()) {
                 Mensaje('Contraseña incorrecta', 'La contraseña ingresada no es correcta. Intenta de nuevo.');
                 return;
@@ -213,12 +233,10 @@ const acciones = {
         $('creando-cuenta-error').classList.add('oculto');
         
         cerrar('window-creando-cuenta');
-        crearCuentaDB($('user').value.trim(), $('password').value);
-        abrir('window-recordar-cuenta');
-    },
-
-    entrarTrasRegistro() {
-        iniciarSesion($('user').value.trim());
+        crearCuentaDB($('user').value.trim().toLowerCase(), $('password').value);
+        
+        iniciarSesion($('user').value.trim().toLowerCase());
+        Mensaje('Recuerda tu cuenta', 'Debes recordar tu usuario y contraseña.<br> <b>No hay forma de recuperar tu cuenta si la olvidas.</b>', 'imgs/warning.png');
     },
 
     // ----Dashboard----
@@ -266,8 +284,14 @@ const acciones = {
 
     // ----Publicar secreto----
     publicarSecreto() {
-        if (!publicacionValida($('pub-secre-input').value, 20, 3)) {
+        const secre = $('pub-secre-input').value
+        if (!publicacionValida(secre, 20, 3)) {
             Mensaje('Secreto no válida', 'Por favor, escribe más para que tu secreto pueda publicarse.');
+            return;
+        }
+
+        if (secretoExiste(secre)) {
+            Mensaje('Secreto ya publicado', 'Este secreto ya se había publicado. Intenta escribir otra cosa.');
             return;
         }
 
@@ -276,7 +300,7 @@ const acciones = {
 
     confirmarPublicar() {
         guardarSecreto(estado.usuario, $('pub-secre-input').value.trim());
-        $('pub-secre-input').value = '';
+        reiniciarPubSecreInput();
 
         irA('page-dashboard');
 
@@ -293,7 +317,7 @@ const acciones = {
     },
 
     salirPublicar() {
-        $('pub-secre-input').value = '';
+        reiniciarPubSecreInput();
         irA('page-dashboard');
     },
 
