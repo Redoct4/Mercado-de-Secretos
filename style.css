@@ -108,6 +108,21 @@ button {
     margin: var(--button-margin);
     padding: 0.8em 2em 0.6em;
 }
+
+button.desabilitado,
+button.desabilitado + label {
+    --button-highlight: #ffffff;
+    --button-shadow: #808080;
+
+    color: var(--button-shadow);
+    text-shadow: 1px 1px 0 var(--button-highlight);
+
+    > img {
+        opacity: 40%;
+    }
+}
+
+
 button.b1 {
     font-size: var(--b1-font-size);
     font-weight: bold;

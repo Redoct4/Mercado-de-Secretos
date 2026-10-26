@@ -8,10 +8,26 @@ const estado = {
 }
 
 // NAVEGACIÓN
+function actualizarLeerSecretoBoton(){
+
+    const secreto = secretoAleatorio();
+
+    if(!puedeLeer() || secreto === null) {
+        $('ir-leer-secreto').classList.add('desabilitado');
+    } else {
+        $('ir-leer-secreto').classList.remove('desabilitado');
+    }
+}
+
 function irA(idPagina) {
     document.querySelectorAll('.page').forEach(pagina => {
         pagina.classList.add('oculto');
     });
+
+    if (idPagina === 'page-dashboard') {
+        actualizarLeerSecretoBoton();
+    }
+
     $(idPagina).classList.remove('oculto');
 }
 
@@ -78,7 +94,7 @@ function normalizarTexto(texto) {
         .toLowerCase()
         .replace(/\s+/g, ' ')               
         .replace(/[^\p{L}\p{N} ]/gu, '');  
-        
+
     return result;
 }
 
@@ -92,6 +108,8 @@ function puedeLeer() {
     const usuario = estado.usuario;
 
     const leidos = baseFalsa.lecturas.get(usuario) ?? new Set();
+    console.log(secretosDe(usuario).length)
+    console.log(leidos.size)
     return secretosDe(usuario).length > leidos.size;
 }
 
@@ -108,8 +126,17 @@ function secretoAleatorio() {
 
     const elegido = disponibles[Math.floor(Math.random() * disponibles.length)];
 
-    leidos.add(elegido.id);
-    baseFalsa.lecturas.set(usuario, leidos);
+    return elegido;
+}
+
+function secretoLeido(elegido) {
+    if (elegido) {
+        const usuario = estado.usuario;
+        const leidos = baseFalsa.lecturas.get(usuario) ?? new Set();
+
+        leidos.add(elegido.id);
+        baseFalsa.lecturas.set(usuario, leidos);
+    }
 
     return elegido;
 }
@@ -263,7 +290,7 @@ const acciones = {
             return;
         }
 
-        const secreto = secretoAleatorio();
+        const secreto = secretoLeido(secretoAleatorio());
 
         if (secreto === null) {
             Mensaje('Sin secretos', 'No hay secretos de otras personas o ya has leído todos los disponibles. <br> Vuelve más tarde.', 'imgs/warning.png');
@@ -286,7 +313,7 @@ const acciones = {
     publicarSecreto() {
         const secre = $('pub-secre-input').value
         if (!publicacionValida(secre, 20, 3)) {
-            Mensaje('Secreto no válida', 'Por favor, escribe más para que tu secreto pueda publicarse.');
+            Mensaje('Secreto no válido', 'Por favor, escribe más para que tu secreto pueda publicarse.');
             return;
         }
 
