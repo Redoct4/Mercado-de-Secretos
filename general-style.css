@@ -45,12 +45,15 @@ body, .page {
 }
 
 .emergent-window {
-    > .window {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    position: fixed;
+    inset: 0;                         /* top, right, bottom y left en 0 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);   /* oscurece el fondo */
+    z-index: 100;
 
+    > .window {
         width: clamp(300px, 25vw, 80vw);
 
         > .title-bar {
@@ -112,4 +115,12 @@ body, .page {
 
 img {
     image-rendering: pixelated;
+}
+
+.oculto {
+    display: none !important;
+}
+
+a:hover {
+    color: darkblue;
 }

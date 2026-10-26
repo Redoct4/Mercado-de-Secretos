@@ -448,11 +448,11 @@ button.mi-secreto-item {
     width: var(--h1-font-size);
     height: var(--h1-font-size);
 }
-.h-title img[class="home-title-icon"] {
+.h-title img[class="inicio-title-icon"] {
     transform: translate(-0.3rem, -0.6rem);
 }
 
-.home-gif {
+.inicio-gif {
     position: absolute;
     transform: scale(20);
     top: 50%;

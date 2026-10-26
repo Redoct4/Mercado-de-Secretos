@@ -21,7 +21,7 @@
     INICIO
   ========================================== */ -->
 
-  <div id="page-home" class="page">
+  <div id="page-inicio" class="page">
 
     <div class="window">
       <div class="title-bar">
@@ -32,9 +32,9 @@
 
         <div class="seccion-superior">
           <div class="h-title">
-            <img src="imgs/envelope_open_sheet.png" class="home-title-icon">
+            <img src="imgs/envelope_open_sheet.png" class="inicio-title-icon">
             <h1>MERCADO DE SECRETOS</h1>
-            <img src="imgs/envelope_open_sheet.png" class="home-title-icon">
+            <img src="imgs/envelope_open_sheet.png" class="inicio-title-icon">
           </div>
           <p class="subtitulo">¡Bienvenido al intercambio de secretos anónimo!</p>
         </div>
@@ -51,15 +51,15 @@
 
               <div class="textbox">
                 <label for="password">Contraseña:</label>
-                <input id="password" type="password"/>
+                <input id="password" type="password" maxlength="20"/>
               </div>
             </div>
             
 
             <div class="checkbox">
-              <input type="checkbox" id="TyC"/>
-              <label for="TyC">
-                <span>Acepto los Términos y Condiciones</span>
+              <input type="checkbox" id="tyc"/>
+              <label for="tyc">
+                <span>Acepto los <a href="#" data-abrir="window-tyc">Términos y Condiciones</a></span>
               </label>
             </div>
 
@@ -69,8 +69,8 @@
 
         <div class="seccion-inferior">
           <div class="button-column">
-            <button class="b1" id="entrar">Entrar</button>
-            <button class="b3" id="?-inicio">¿Qué es esto?</button>
+            <button class="b1" data-accion="entrar">Entrar</button>
+            <button class="b3" data-abrir="ayuda-inicio">¿Qué es esto?</button>
           </div>
         </div>
       
@@ -81,7 +81,7 @@
 
   <!-- VENTANA EMERGENTE - CREANDO CUENTA -->
 
-  <div id="window-creando-cuenta" class="emergent-window" style="display: none;">
+  <div id="window-creando-cuenta" class="emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -96,13 +96,20 @@
         <div class = "seccion-cuerpo-emergent">
           <img src="imgs/creating-account.png">
           <div class="seccion-cuerpo-emergent-text">
-            <p>Este usuario y contraseña no existen.<br> <b>¿Quieres crear una nueva cuenta?</b> </p>
+            <p>Este usuario y contraseña no existen.<br> <b>Si quieres crear una nueva cuenta, confirma tu contraseña:</b> </p>
+            <div class="textbox">
+              <label for="password">Contraseña:</label>
+              <input id="password-confirm" type="password" maxlength="20"/>
+            </div>
+            <p id="creando-cuenta-error" class="oculto" style="color: rgb(194, 20, 20); margin-bottom: 0; margin-top: 0.5rem;">
+              Las contraseñas no coinciden.
+            </p>
           </div>
         </div>
 
         <div class="emergent-actions">
-          <button id="creando-cuenta-ACEPTAR" class="b4">Aceptar</button>
-          <button id="creando-cuenta-CANCELAR" class="b4">Cancelar</button>
+          <button data-accion="crearCuenta" class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Cancelar</button>
         </div>
 
       </div>
@@ -112,7 +119,7 @@
 
   <!-- VENTANA EMERGENTE - RECORDAR CUENTA -->
 
-  <div id="window-recordar-cuenta" class="emergent-window" style="display: none;">
+  <div id="window-recordar-cuenta" class="emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -132,7 +139,7 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="recordar-cuenta-ACEPTAR" class="b4">Aceptar</button>
+          <button data-cerrar data-accion="entrarTrasRegistro" class="b4">Aceptar</button>
         </div>
 
       </div>
@@ -142,7 +149,7 @@
 
   <!-- VENTANA EMERGENTE - TERMINOS Y CONDICIONES -->
 
-  <div id="window-TyC" class="emergent-window big-emergent-window" style="display: none;">
+  <div id="window-tyc" class="emergent-window big-emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -208,7 +215,7 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="TyC-ACEPTAR" class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Aceptar</button>
         </div>
 
       </div>
@@ -220,7 +227,7 @@
     DASHBOARD
   ========================================== -->
 
-  <div id="page-dashboard" class="page" style="display: none;">
+  <div id="page-dashboard" class="page oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -240,19 +247,19 @@
 
             <div class ="dashboard-buttons-primary">
 
-              <button class="b-img1" id="ir-publicar-secreto">
+              <button class="b-img1" data-ir="page-publicar-secreto">
                 <img src="imgs/write.png">
                 <span>Publica un secreto</span>
               </button>
 
-              <button class="b-img1" id="ir-leer-secreto">
+              <button class="b-img1" data-accion="IrLeerSecreto">
                 <img src="imgs/read.png">
                 <span>Lee un secreto</span>
               </button>
 
             </div>
 
-            <button class="b-img3" id="ir-consultar-secretos">
+            <button class="b-img3" data-accion="IrConsultarSecretos">
               <img src="imgs/consult.png">
               <span>Consulta tus secretos</span>
             </button>
@@ -265,10 +272,10 @@
 
           <div class="exit-button">
             <p>¡Recuerda cerrar sesión!</p>
-            <button class="b1" id="salir">Salir</button>
+            <button class="b1" data-abrir="window-cerrando-sesion">Salir</button>
           </div>
 
-          <button class="b-img2" id="?-dashboard">
+          <button class="b-img2" data-abrir="ayuda-window-pub-secre">
             <img src="imgs/help.png">
           </button>
 
@@ -281,7 +288,7 @@
 
   <!-- VENTANA EMERGENTE - CERRAR SESIÓN -->
 
-  <div id="window-cerrando-sesion" class="emergent-window" style="display: none;">
+  <div id="window-cerrando-sesion" class="emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -301,8 +308,8 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="cerrando-sesion-ACEPTAR" class="b4">Aceptar</button>
-          <button id="cerrando-sesion-CANCELAR" class="b4">Cancelar</button>
+          <button data-cerrar data-ir="page-inicio" class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Cancelar</button>
         </div>
 
       </div>
@@ -312,7 +319,7 @@
 
   <!-- VENTANA EMERGENTE - LECTURA BLOQUEADA -->
 
-  <div id="window-lectura-bloqueada" class="emergent-window" style="display: none;">
+  <div id="window-lectura-bloqueada" class="emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -332,7 +339,7 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="lectura-bloqueada-ACEPTAR" class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Aceptar</button>
         </div>
 
       </div>
@@ -344,7 +351,7 @@
     PUBLICAR SECRETO
   ========================================== -->
 
-  <div id="page-publicar-secreto" class="page" style="display: none;">
+  <div id="page-publicar-secreto" class="page oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -368,14 +375,14 @@
                 class="pub-secre-input" 
                 id="pub-secre-input" 
                 placeholder="Escribe un secreto. Nadie sabrá que fuiste tú..."
-                maxlength="1200"
+                maxlength="1400"
               ></textarea>
 
               <p>0 / 1400</p>
 
             </div>
 
-            <button class="b1" id="publicar-secreto">
+            <button class="b1" data-accion="publicarSecreto">
               <span>Publicar</span>
             </button>
 
@@ -386,10 +393,10 @@
         <div class="acciones-inferiores">
 
           <div class="back-button">
-            <button class="b2" id="regresar-pub-secre">Atrás</button>
+            <button class="b2" data-accion="regresarPublicar">Atrás</button>
           </div>
 
-          <button class="b-img2" id="?-pub-secre">
+          <button class="b-img2" data-abrir="ayuda-window-pub-secre">
             <img src="imgs/help.png">
           </button>
 
@@ -402,7 +409,7 @@
 
   <!-- VENTANA EMERGENTE - PUBLICANDO SECRETO -->
 
-  <div id="window-publicando-secreto" class="emergent-window" style="display: none;">
+  <div id="window-publicando-secreto" class="emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -422,8 +429,8 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="publicando-secreto-ACEPTAR" class="b4">Aceptar</button>
-          <button id="publicando-secreto-CANCELAR" class="b4">Cancelar</button>
+          <button data-cerrar data-accion="publicarSecretoAceptar" class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Cancelar</button>
         </div>
 
       </div>
@@ -433,7 +440,7 @@
 
   <!-- VENTANA EMERGENTE - REGRESANDO AL DASHBOARD -->
 
-  <div id="window-regresar-dashboard-publicar" class="emergent-window" style="display: none;">
+  <div id="window-regresar-dashboard-publicar" class="emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -453,8 +460,8 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="regresar-dashboard-publicar-ACEPTAR" class="b4">Aceptar</button>
-          <button id="regresar-dashboard-publicar-CANCELAR" class="b4">Cancelar</button>
+          <button data-cerrar data-accion="salirPublicar" class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Cancelar</button>
         </div>
 
       </div>
@@ -466,7 +473,7 @@
     LEER SECRETO
   ========================================== -->
 
-  <div id="page-leer-secreto" class="page" style="display: none;">
+  <div id="page-leer-secreto" class="page oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -490,7 +497,7 @@
 
             <div class="respuesta-sec">
               
-              <button class="b1" id="responder-secreto" style="display: none;">
+              <button class="b1" data-accion="mostrarRespuesta" id="responder-secreto">
                 <span>Responder...</span>
               </button>
 
@@ -502,7 +509,7 @@
                   maxlength="800"
                 ></textarea>
 
-                <button class="b2" id="publicar-respuesta">
+                <button class="b2" data-accion="publicarRespuesta">
                   <span>Publicar respuesta</span>
                 </button>
                 
@@ -517,10 +524,10 @@
         <div class="acciones-inferiores">
 
           <div class="back-button">
-            <button class="b2" id="regresar-leer-secre">Atrás</button>
+            <button class="b2" data-accion="regresarLeer">Atrás</button>
           </div>
 
-          <button class="b-img2" id="?-leer-secre">
+          <button class="b-img2" data-abrir="ayuda-window-leer-secre">
             <img src="imgs/help.png">
           </button>
 
@@ -533,7 +540,7 @@
 
   <!-- VENTANA EMERGENTE - PUBLICANDO RESPUESTAS -->
 
-  <div id="window-publicando-respuesta" class="emergent-window" style="display: none;">
+  <div id="window-publicando-respuesta" class="emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -553,8 +560,8 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="publicando-respuesta-ACEPTAR" class="b4">Aceptar</button>
-          <button id="publicando-respuesta-CANCELAR" class="b4">Cancelar</button>
+          <button data-cerrar data-accion="confirmarRespuesta" class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Cancelar</button>
         </div>
 
       </div>
@@ -564,7 +571,7 @@
 
   <!-- VENTANA EMERGENTE - REGRESANDO AL DASHBOARD -->
 
-  <div id="window-regresar-dashboard-responder" class="emergent-window" style="display: none;">
+  <div id="window-regresar-dashboard-responder" class="emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -579,13 +586,13 @@
         <div class = "seccion-cuerpo-emergent">
           <img src="imgs/warning.png">
           <div class="seccion-cuerpo-emergent-text">
-            <p>Tu respuesta se perderá si sales de esta ventana. <b>¿Estás seguro de querer salir?</b></p>
+            <p>El secreto que te apareció y la respuesta que estés escribiendo se perderán si sales de esta ventana. <b>¿Estás seguro de querer salir?</b></p>
           </div>
         </div>
 
         <div class="emergent-actions">
-          <button id="regresar-dashboard-responder-ACEPTAR" class="b4">Aceptar</button>
-          <button id="regresar-dashboard-responder-CANCELAR" class="b4">Cancelar</button>
+          <button data-cerrar data-accion="salirLeer" class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Cancelar</button>
         </div>
 
       </div>
@@ -597,7 +604,7 @@
     CONSULTAR SECRETOS
   ========================================== -->
 
-  <div id="page-consultar-secretos" class="page" style="display: none;">
+  <div id="page-consultar-secretos" class="page oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -628,10 +635,10 @@
         <div class="acciones-inferiores">
 
           <div class="back-button">
-            <button class="b2" id="regresar-consulta-secre">Atrás</button>
+            <button class="b2" data-ir="page-dashboard">Atrás</button>
           </div>
 
-          <button class="b-img2" id="?-consulta-secre">
+          <button class="b-img2" data-abrir="ayuda-window-consultar-secre">
             <img src="imgs/help.png">
           </button>
 
@@ -646,7 +653,7 @@
     RESPUESTAS MI SECRETO
   ========================================== -->
 
-  <div id="page-respuestas-mi-secreto" class="page" style="display: none;">
+  <div id="page-respuestas-mi-secreto" class="page oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -681,10 +688,10 @@
         <div class="acciones-inferiores">
 
           <div class="back-button">
-            <button class="b2" id="regresar-respuestas-mi-secreto">Atrás</button>
+            <button class="b2" data-ir="page-consultar-secretos">Atrás</button>
           </div>
 
-          <button class="b-img2" id="?-resp-mi-secre">
+          <button class="b-img2" data-abrir="ayuda-window-resp-mi-secre">
             <img src="imgs/help.png">
           </button>
 
@@ -701,7 +708,7 @@
 
   <!-- Ventana de ayuda - Inicio -->
 
-  <div id="?window-inicio" class="emergent-window big-emergent-window" style="display: none;">
+  <div id="ayuda-window-inicio" class="emergent-window big-emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -734,7 +741,7 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="?-inicio-ACEPTAR" class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Aceptar</button>
         </div>
 
       </div>
@@ -744,7 +751,7 @@
 
   <!-- Ventana de ayuda - Dashbboard -->
 
-  <div id="?window-dashboard" class="emergent-window big-emergent-window" style="display: none;">
+  <div id="ayuda-window-dashboard" class="emergent-window big-emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -776,7 +783,7 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="?-dashboard-ACEPTAR" class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Aceptar</button>
         </div>
 
       </div>
@@ -786,7 +793,7 @@
 
   <!-- Ventana de ayuda - Publicar secreto -->
 
-  <div id="?window-pub-secre" class="emergent-window big-emergent-window" style="display: none;">
+  <div id="ayuda-window-pub-secre" class="emergent-window big-emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -816,7 +823,7 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="?-pub-secre-ACEPTAR" class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Aceptar</button>
         </div>
 
       </div>
@@ -826,7 +833,7 @@
 
   <!-- Ventana de ayuda - Leer secreto -->
 
-  <div id="?window-leer-secre" class="emergent-window big-emergent-window" style="display: none;">
+  <div id="ayuda-window-leer-secre" class="emergent-window big-emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -856,7 +863,7 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="?-leer-secre-ACEPTAR" class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Aceptar</button>
         </div>
 
       </div>
@@ -866,7 +873,7 @@
 
   <!-- Ventana de ayuda - Consultar secretos -->
 
-  <div id="?window-consulta-secre" class="emergent-window big-emergent-window">
+  <div id="ayuda-window-consultar-secre" class="emergent-window big-emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -894,7 +901,7 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="?-consulta-secre-ACEPTAR" class="b4">Aceptar</button>
+          <button data-cerrar class="b4">Aceptar</button>
         </div>
 
       </div>
@@ -904,7 +911,7 @@
 
   <!-- Ventana de ayuda - Tu secreto -->
 
-  <div id="?window-resp-mi-secre" class="emergent-window big-emergent-window">
+  <div id="ayuda-window-resp-mi-secre" class="emergent-window big-emergent-window oculto">
 
     <div class="window">
       <div class="title-bar">
@@ -932,7 +939,41 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="?-resp-mi-secre-ACEPTAR" class="b4">Aceptar</button>
+          <button id=data-cerrar class="b4">Aceptar</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==========================================
+    REUTILIZABLES
+  ========================================== */ -->
+
+  <!-- Ventana mensaje -->
+
+  <div id="window-mensaje" class="emergent-window oculto">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text" id="mensaje-titulo"></div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class = "seccion-cuerpo-emergent">
+          <img id="mensaje-icono" src="imgs/x.png">
+          <div class="seccion-cuerpo-emergent-text">
+            <p id="mensaje-texto"></p>
+          </div>
+        </div>
+
+        <div class="emergent-actions">
+          <button class="b4" data-cerrar>Aceptar</button>
         </div>
 
       </div>
