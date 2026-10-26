@@ -603,7 +603,7 @@ button.mi-secreto-item {
     }
 }
 
-/*¨Ventana emergente con scrollable text */
+/*Ventana emergente con scrollable text */
 .scrollable-cuerpo {
     height: 20rem;
     overflow-y: auto;

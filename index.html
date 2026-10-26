@@ -216,8 +216,6 @@
 
   </div>
 
-
-
   <!-- ==========================================
     DASHBOARD
   ========================================== -->
@@ -281,6 +279,67 @@
 
   </div>
 
+  <!-- VENTANA EMERGENTE - CERRAR SESIÓN -->
+
+  <div id="window-cerrando-sesion" class="emergent-window" style="display: none;">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Cerrando sesión</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class = "seccion-cuerpo-emergent">
+          <img src="imgs/warning.png">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>¿Estás seguro de querer cerrar sesión?</p>
+          </div>
+        </div>
+
+        <div class="emergent-actions">
+          <button id="cerrando-sesion-ACEPTAR" class="b4">Aceptar</button>
+          <button id="cerrando-sesion-CANCELAR" class="b4">Cancelar</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VENTANA EMERGENTE - LECTURA BLOQUEADA -->
+
+  <div id="window-lectura-bloqueada" class="emergent-window" style="display: none;">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Bloqueado</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class = "seccion-cuerpo-emergent">
+          <img src="imgs/x.png">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>Para leer otro secreto, debes publicar uno antes.</p>
+          </div>
+        </div>
+
+        <div class="emergent-actions">
+          <button id="lectura-bloqueada-ACEPTAR" class="b4">Aceptar</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
   <!-- ==========================================
     PUBLICAR SECRETO
   ========================================== -->
@@ -334,6 +393,68 @@
             <img src="imgs/help.png">
           </button>
 
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VENTANA EMERGENTE - PUBLICANDO SECRETO -->
+
+  <div id="window-publicando-secreto" class="emergent-window" style="display: none;">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Publicando secreto</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class = "seccion-cuerpo-emergent">
+          <img src="imgs/warning.png">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>¿Estás seguro de publicar tu secreto anónimo?</p>
+          </div>
+        </div>
+
+        <div class="emergent-actions">
+          <button id="publicando-secreto-ACEPTAR" class="b4">Aceptar</button>
+          <button id="publicando-secreto-CANCELAR" class="b4">Cancelar</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VENTANA EMERGENTE - REGRESANDO AL DASHBOARD -->
+
+  <div id="window-regresar-dashboard-publicar" class="emergent-window" style="display: none;">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Regresando al inicio</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class = "seccion-cuerpo-emergent">
+          <img src="imgs/warning.png">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>Tu secreto se perderá si sales de esta ventana. <b>¿Estás seguro de querer salir?</b></p>
+          </div>
+        </div>
+
+        <div class="emergent-actions">
+          <button id="regresar-dashboard-publicar-ACEPTAR" class="b4">Aceptar</button>
+          <button id="regresar-dashboard-publicar-CANCELAR" class="b4">Cancelar</button>
         </div>
 
       </div>
@@ -403,6 +524,68 @@
             <img src="imgs/help.png">
           </button>
 
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VENTANA EMERGENTE - PUBLICANDO RESPUESTAS -->
+
+  <div id="window-publicando-respuesta" class="emergent-window" style="display: none;">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Publicando respuesta</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class = "seccion-cuerpo-emergent">
+          <img src="imgs/warning.png">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>¿Estás seguro de publicar tu respuesta anónima a este secreto?</p>
+          </div>
+        </div>
+
+        <div class="emergent-actions">
+          <button id="publicando-respuesta-ACEPTAR" class="b4">Aceptar</button>
+          <button id="publicando-respuesta-CANCELAR" class="b4">Cancelar</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VENTANA EMERGENTE - REGRESANDO AL DASHBOARD -->
+
+  <div id="window-regresar-dashboard-responder" class="emergent-window" style="display: none;">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Regresando al inicio</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class = "seccion-cuerpo-emergent">
+          <img src="imgs/warning.png">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>Tu respuesta se perderá si sales de esta ventana. <b>¿Estás seguro de querer salir?</b></p>
+          </div>
+        </div>
+
+        <div class="emergent-actions">
+          <button id="regresar-dashboard-responder-ACEPTAR" class="b4">Aceptar</button>
+          <button id="regresar-dashboard-responder-CANCELAR" class="b4">Cancelar</button>
         </div>
 
       </div>
@@ -551,7 +734,7 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="creando-cuenta-ACEPTAR" class="b4">Aceptar</button>
+          <button id="?-inicio-ACEPTAR" class="b4">Aceptar</button>
         </div>
 
       </div>
@@ -561,7 +744,7 @@
 
   <!-- Ventana de ayuda - Dashbboard -->
 
-  <div id="?window-dashboard" class="emergent-window big-emergent-window">
+  <div id="?window-dashboard" class="emergent-window big-emergent-window" style="display: none;">
 
     <div class="window">
       <div class="title-bar">
@@ -593,7 +776,163 @@
         </div>
 
         <div class="emergent-actions">
-          <button id="creando-cuenta-ACEPTAR" class="b4">Aceptar</button>
+          <button id="?-dashboard-ACEPTAR" class="b4">Aceptar</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Ventana de ayuda - Publicar secreto -->
+
+  <div id="?window-pub-secre" class="emergent-window big-emergent-window" style="display: none;">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Ayuda</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class="seccion-superior">
+          <h4>¿Cómo publico un secreto?</h4>
+        </div>
+
+        <div class = "seccion-cuerpo-emergent">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>Aquí podrás escribir lo que tú quieras. Ya sea un secreto, confesión, anécdota o simplemente algo que quieras sacar de tu pecho.</p>
+            <ul class="lista-imgs">
+              <li class="con-icono" style="--icono: url('imgs/users.png')">Otras personas podrán verlo y responder acorde a lo que escribas. Tal vez hasta puedas encontrar un consejo que te pueda servir.</li>
+              <li class="con-icono" style="--icono: url('imgs/write.png')">Escribe el secreto en el cuadro de texto, y cuando estés listo, da clic en <b>PUBLICAR</b>.</li>
+              <li class="con-icono" style="--icono: url('imgs/tyc.png')">Revisa los términos y condiciones para conocer las normas de conducta y publicación <i>(Puedes consultarlos desde la página principal).</i></li>
+            </ul>
+            <p>Recuerda que todo es anónimo, ¡no temas expresarte con honestidad!</p>
+          </div>
+          
+        </div>
+
+        <div class="emergent-actions">
+          <button id="?-pub-secre-ACEPTAR" class="b4">Aceptar</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Ventana de ayuda - Leer secreto -->
+
+  <div id="?window-leer-secre" class="emergent-window big-emergent-window" style="display: none;">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Ayuda</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class="seccion-superior">
+          <h4>Leyendo un secreto</h4>
+        </div>
+
+        <div class = "seccion-cuerpo-emergent">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>El secreto mostrado aquí se eligió de forma aleatoria entre todos los que se encuentran dentro de la base de datos.</p>
+            <ul class="lista-imgs">
+              <li class="con-icono" style="--icono: url('imgs/open_book.png')">Lee el secreto a tu propia discreción.</li>
+              <li class="con-icono" style="--icono: url('imgs/notebook.png')">Si lo deseas, ¡puedes responder y dejar un buen consejo! Da click en el botón <b>RESPONDER</b>, escribe tu respuesta, y luego da clic en <b>PUBLICAR RESPUESTA</b>.</li>
+              <li class="con-icono" style="--icono: url('imgs/tyc.png')">Revisa los términos y condiciones para conocer las normas de conducta y publicación <i>(Puedes consultarlos desde la página principal).</i></li>
+            </ul>
+            <p>Recuerda que todo es anónimo, ¡no temas expresarte con honestidad!</p>
+          </div>
+          
+        </div>
+
+        <div class="emergent-actions">
+          <button id="?-leer-secre-ACEPTAR" class="b4">Aceptar</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Ventana de ayuda - Consultar secretos -->
+
+  <div id="?window-consulta-secre" class="emergent-window big-emergent-window">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Ayuda</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class="seccion-superior">
+          <h4>¿Cómo reviso las respuestas a mis secretos?</h4>
+        </div>
+
+        <div class = "seccion-cuerpo-emergent">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>Aquí se muestra una lista con todos los secretos que has publicado.</p>
+            <ul class="lista-imgs">
+              <li class="con-icono" style="--icono: url('imgs/note.png')">Da clic en un secreto para revisar sus respuestas.</li>
+              <li class="con-icono" style="--icono: url('imgs/consult.png')">Regresa cuando quieras para mantenerte al tanto de las respuestas que has recibido.</li>
+            </ul>
+          </div>
+          
+        </div>
+
+        <div class="emergent-actions">
+          <button id="?-consulta-secre-ACEPTAR" class="b4">Aceptar</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Ventana de ayuda - Tu secreto -->
+
+  <div id="?window-resp-mi-secre" class="emergent-window big-emergent-window">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Ayuda</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class="seccion-superior">
+          <h4>Las respuestas de mis secretos</h4>
+        </div>
+
+        <div class = "seccion-cuerpo-emergent">
+          <div class="seccion-cuerpo-emergent-text">
+            <p>Aquí se muestra uno de los secretos que has publicado.</p>
+            <ul class="lista-imgs">
+              <li class="con-icono" style="--icono: url('imgs/note.png')">En la parte inferior podras ver las respuestas que has recibido. Esperamos te sean de ayuda.</li>
+              <li class="con-icono" style="--icono: url('imgs/warning.png')">Recuerda que las respuestas no son aprobadas. Consulta esta sección bajo tu propio riesgo. Si recibes alguna respuesta que infrinja las normas de conducta y publicación, comunícate con el responsable de la obra <i>(Disponible en los términos y condiciones, en la página de inicio).</i></li>
+            </ul>
+          </div>
+          
+        </div>
+
+        <div class="emergent-actions">
+          <button id="?-resp-mi-secre-ACEPTAR" class="b4">Aceptar</button>
         </div>
 
       </div>
