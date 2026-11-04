@@ -1,11 +1,55 @@
 const $ = (id) => document.getElementById(id);
 
+// SONIDO
+const sonidos = {
+    clic:  new Audio('sounds/clic.WAV'),
+    error: new Audio('sounds/error.WAV'),
+    arrive:    new Audio('sounds/arrive.WAV'),
+    ding: new Audio('sounds/ding.WAV'),
+    logoff: new Audio('sounds/logoff.WAV'),
+    notif: new Audio('sounds/notif.WAV'),
+    tada: new Audio('sounds/tada.WAV'),
+    trash: new Audio('sounds/trash.WAV'),
+};
+
+const sonidoPorIcono = {
+    'imhs/v.png': 'tada',
+    'imhs/warning.png': 'ding',
+    'imhs/x.png': 'error'
+}
+
+const volumen = 0.6;
+
+function sound(name) {
+    const sonido = sonidos[name];
+    if (!sonido) return;
+
+    const clone = sonido.cloneNode();
+    clone.volume = volumen;
+    clone.play().catch(()=>{});
+}
+
+function sonarVentana(idVentana) {
+    if($(idVentana).querySelector('img')) {
+        const icono = $(idVentana).querySelector('img').src;
+        const nombre = sonidoPorIcono[icono];
+        if (nombre) {
+            sonar(nombre);
+        } else {
+            sonar('notif');
+        }
+    } else if (sonidoporIcono[idVentana]) {
+        sonar(sonidoporIcono[idVentana]);
+    }
+    
+}
+
 // ESTADO DE APP
 const estado = {
     usuario: null,
     secretoLeyendo: null,
     secretoConsultado: null
-}
+};
 
 // NAVEGACIÓN
 function actualizarLeerSecretoBoton(){
@@ -33,6 +77,8 @@ function irA(idPagina) {
 
 function abrir(idVentana) {
     $(idVentana).classList.remove('oculto');
+
+    sonarVentana(idVentana);
 }
 
 function cerrar(idVentana) {
@@ -46,6 +92,8 @@ function Mensaje(titulo, textoHtml, icono = 'imgs/x.png') {
     $('mensaje-texto').innerHTML = textoHtml;
 
     abrir('window-mensaje')
+
+    sonarVentana(icono);
 }
 
 // DATOS
@@ -201,6 +249,9 @@ function iniciarSesion(usuario) {
     $('password').value = '';
     $('user').value = '';
     $('tyc').checked = false;
+
+    sonar('arrive');
+
     irA('page-dashboard');
 }
 
@@ -276,6 +327,9 @@ const acciones = {
         $('user').value = '';
         $('password').value = '';
         $('tyc').checked = false;
+
+        sonar('logoff');
+
         irA('page-inicio');
     },
 
@@ -345,6 +399,9 @@ const acciones = {
 
     salirPublicar() {
         reiniciarPubSecreInput();
+
+        sonar('trash');
+
         irA('page-dashboard');
     },
 
@@ -384,6 +441,8 @@ const acciones = {
         $('respuesta-input').value = '';
         $('responder-secreto-texto').classList.add('oculto');
 
+        sonar('trash');
+
         irA('page-dashboard');
     },
 }
@@ -400,6 +459,9 @@ document.addEventListener('click', (evento) => {
 
     const button = evento.target.closest('button, a[data-abrir]');
     if(!button) return;
+
+    sonar('clic');
+
     if(button.tagName === 'A') evento.preventDefault();
 
     const data = button.dataset;
