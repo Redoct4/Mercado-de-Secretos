@@ -18,17 +18,12 @@ const sonidoPorIcono = {
     'imgs/x.png': 'error'
 }
 
-let volumen = 0.2;
+let volumen = 0.6;
 
 function sonar(name) {
 
-    console.log(name)
     const sonido = sonidos[name];
     if (!sonido) return;
-
-    if (name === 'clic') {
-        volumen = 1;
-    }
 
     const clone = sonido.cloneNode();
     clone.volume = volumen;
@@ -41,8 +36,11 @@ function sonarVentana(idVentana) {
 
     if($(idVentana)) {
         if ($(idVentana).querySelector('img')) {
-            const icono = $(idVentana).querySelector('img').src;
+            const icono = $(idVentana).querySelector('img').getAttribute('src');
             const nombre = sonidoPorIcono[icono];
+
+            console.log('icono', icono, 'nombre', nombre);
+
             if (nombre) {
                 sonar(nombre);
             } else {
@@ -341,6 +339,7 @@ const acciones = {
         $('tyc').checked = false;
 
         sonar('logoff');
+        console.log('Sesión cerrada');
 
         irA('page-inicio');
     },
@@ -463,16 +462,16 @@ const acciones = {
 
 document.addEventListener('click', (evento) => {
 
+    const button = evento.target.closest('button, a[data-abrir]');
+    if(!button) return;
+
+    sonar('clic');
+
     const close = evento.target.closest('.emergent-window .title-bar-controls button');
     if (close) {
         cerrar(close.closest('.emergent-window').id);
         return;
     }
-
-    const button = evento.target.closest('button, a[data-abrir]');
-    if(!button) return;
-
-    sonar('clic');
 
     if(button.tagName === 'A') evento.preventDefault();
 
