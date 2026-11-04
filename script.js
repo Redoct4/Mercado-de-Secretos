@@ -2,27 +2,33 @@ const $ = (id) => document.getElementById(id);
 
 // SONIDO
 const sonidos = {
-    clic:  new Audio('sounds/clic.WAV'),
-    error: new Audio('sounds/error.WAV'),
-    arrive:    new Audio('sounds/arrive.WAV'),
-    ding: new Audio('sounds/ding.WAV'),
-    logoff: new Audio('sounds/logoff.WAV'),
-    notif: new Audio('sounds/notif.WAV'),
-    tada: new Audio('sounds/tada.WAV'),
-    trash: new Audio('sounds/trash.WAV'),
+    clic:  new Audio('sound/clic.WAV'),
+    error: new Audio('sound/error.WAV'),
+    arrive:    new Audio('sound/arrive.WAV'),
+    ding: new Audio('sound/ding.WAV'),
+    logoff: new Audio('sound/logoff.WAV'),
+    notif: new Audio('sound/notif.WAV'),
+    tada: new Audio('sound/tada.WAV'),
+    trash: new Audio('sound/trash.WAV'),
 };
 
 const sonidoPorIcono = {
-    'imhs/v.png': 'tada',
-    'imhs/warning.png': 'ding',
-    'imhs/x.png': 'error'
+    'imgs/v.png': 'tada',
+    'imgs/warning.png': 'ding',
+    'imgs/x.png': 'error'
 }
 
-const volumen = 0.6;
+let volumen = 0.2;
 
-function sound(name) {
+function sonar(name) {
+
+    console.log(name)
     const sonido = sonidos[name];
     if (!sonido) return;
+
+    if (name === 'clic') {
+        volumen = 1;
+    }
 
     const clone = sonido.cloneNode();
     clone.volume = volumen;
@@ -30,16 +36,22 @@ function sound(name) {
 }
 
 function sonarVentana(idVentana) {
-    if($(idVentana).querySelector('img')) {
-        const icono = $(idVentana).querySelector('img').src;
-        const nombre = sonidoPorIcono[icono];
-        if (nombre) {
-            sonar(nombre);
-        } else {
-            sonar('notif');
+
+    if(idVentana === 'window-mensaje') return;
+
+    if($(idVentana)) {
+        if ($(idVentana).querySelector('img')) {
+            const icono = $(idVentana).querySelector('img').src;
+            const nombre = sonidoPorIcono[icono];
+            if (nombre) {
+                sonar(nombre);
+            } else {
+                sonar('notif');
+            }
         }
-    } else if (sonidoporIcono[idVentana]) {
-        sonar(sonidoporIcono[idVentana]);
+    } 
+    if (sonidoPorIcono[idVentana]) {
+        sonar(sonidoPorIcono[idVentana]);
     }
     
 }
