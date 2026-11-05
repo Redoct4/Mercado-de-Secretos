@@ -63,15 +63,10 @@ const estado = {
 };
 
 // NAVEGACIÓN
-function actualizarLeerSecretoBoton(){
+async function actualizarLeerSecretoBoton(){
 
-    const secreto = secretoAleatorio();
-
-    if(!puedeLeer() || secreto === null) {
-        $('ir-leer-secreto').classList.add('desabilitado');
-    } else {
-        $('ir-leer-secreto').classList.remove('desabilitado');
-    }
+    const {puedeLeer, hayDisponibles} = await api.estadoLectura();
+    $('ir-leer-secreto').classList.toggle('desabilitado', !(puedeLeer && hayDisponibles));
 }
 
 function irA(idPagina) {
@@ -109,40 +104,9 @@ function Mensaje(titulo, textoHtml, icono = 'imgs/x.png') {
 
 // DATOS
 // Map es diccionario
-const baseFalsa = {
-    cuentas: new Map(),     // usuario -> contraseña
-    secretos: [],           // { id, autor, texto, respuestas: [{ autor, texto }] }
-    lecturas: new Map(),    // usuario -> [ ids ]
-    siguienteId: 1
-}
-
-function cuentaExiste(usuario) {
-    return baseFalsa.cuentas.has(usuario);
-}
-
-function contrasenaCorrecta(usuario, contrasena) {
-    return baseFalsa.cuentas.get(usuario) === contrasena;
-}
 
 function confirmarContraseña() {
     return $('password').value === $('password-confirm').value
-}
-
-function crearCuentaDB(usuario, contrasena) {
-    baseFalsa.cuentas.set(usuario, contrasena);
-}
-
-function guardarSecreto(usuario, texto) {
-    baseFalsa.secretos.push({
-        id: baseFalsa.siguienteId++,
-        autor: usuario,
-        texto: texto,
-        respuestas: []
-    })
-}
-
-function secretosDe(usuario) {
-    return baseFalsa.secretos.filter(s => s.autor === usuario);
 }
 
 function normalizarTexto(texto) {
@@ -153,51 +117,6 @@ function normalizarTexto(texto) {
         .replace(/[^\p{L}\p{N} ]/gu, '');  
 
     return result;
-}
-
-function secretoExiste(texto) {
-    const nuevo = normalizarTexto(texto);
-    return baseFalsa.secretos.some(s => normalizarTexto(s.texto) === nuevo);
-}
-
-// Regla 1 a 1: puedes leer mientras hayas publicado uno más de lo que has leido
-function puedeLeer() {
-    const usuario = estado.usuario;
-
-    const leidos = baseFalsa.lecturas.get(usuario) ?? new Set();
-    return secretosDe(usuario).length > leidos.size;
-}
-
-function secretoAleatorio() {
-    const usuario = estado.usuario;
-
-    // secretos de otros que este usuario aún no ha leído
-    const leidos = baseFalsa.lecturas.get(usuario) ?? new Set();
-    const disponibles = baseFalsa.secretos.filter(s =>
-        s.autor !== usuario && !leidos.has(s.id)
-    );
-
-    if (disponibles.length === 0) return null;
-
-    const elegido = disponibles[Math.floor(Math.random() * disponibles.length)];
-
-    return elegido;
-}
-
-function secretoLeido(elegido) {
-    if (elegido) {
-        const usuario = estado.usuario;
-        const leidos = baseFalsa.lecturas.get(usuario) ?? new Set();
-
-        leidos.add(elegido.id);
-        baseFalsa.lecturas.set(usuario, leidos);
-    }
-
-    return elegido;
-}
-
-function guardarRespuesta(secreto, autor, texto) {
-    secreto.respuestas.push({ autor: autor, texto: texto });
 }
 
 // Filtro de longitud publicación y respuesta
@@ -213,12 +132,14 @@ function publicacionValida(texto, minCharacters, minWords) {
 }
 
 // DIBUJAR LISTAS
-function dibujarMisSecretos() {
+async function dibujarMisSecretos() {
+
+    const secretos = await api.secretosPropios();
     const lista = $('lista-mis-secretos');
     const plantilla = $('plantilla-mi-secreto');
     lista.innerHTML = '';
 
-    secretosDe(estado.usuario).forEach(secreto => {
+    secretos.forEach(secreto => {
         const copia = plantilla.content.cloneNode(true);
         const button = copia.querySelector('button');
 
@@ -229,7 +150,7 @@ function dibujarMisSecretos() {
     });
 }
 
-function abrirMiSecreto(secreto) {
+async function abrirMiSecreto(secreto) {
     estado.secretoConsultado = secreto;
     document.querySelector('.mi-secre-texto span').textContent = secreto.texto;
 
@@ -238,7 +159,9 @@ function abrirMiSecreto(secreto) {
 
     lista.innerHTML = '';
 
-    secreto.respuestas.forEach(respuesta => {
+    const respuestas = await api.respuestasDe(secreto.id);
+
+    respuestas.forEach(respuesta => {
         const copia = plantilla.content.cloneNode(true);
         copia.querySelector('.respuesta-mi-secre-item-texto').textContent = respuesta.texto;
 
@@ -260,6 +183,7 @@ function iniciarSesion(usuario) {
     sonar('arrive');
 
     irA('page-dashboard');
+    reiniciarInactividad();
 }
 
 function abrirCreandoCuenta() {
@@ -274,11 +198,20 @@ function reiniciarPubSecreInput(){
     $('pub-secre-input-limit').textContent = "0 / " + $('pub-secre-input').maxLength;
 }
 
+function comprobarTyC() {
+    if (!$('tyc').checked) {
+        Mensaje('Acepta TyC', 'Para continuar, debes marcar la casilla de términos y condiciones.');
+        return false;
+    }
+    return true;
+}
+
+
 const acciones = {
 
     //----Inicio y cuenta----
 
-    entrar() {
+    async entrar() {
 
         const usuario = $('user').value.trim().toLowerCase();
         const contrasena = $('password').value;
@@ -288,45 +221,50 @@ const acciones = {
             return;
         }
 
-        if (baseFalsa.cuentas.has(usuario)) {
-            if (!contrasenaCorrecta(usuario, contrasena)) {
-                Mensaje('Contraseña incorrecta', 'La contraseña ingresada no es correcta. Intenta de nuevo.');
-                return;
-            }
-        }
+        
 
-        if (!$('tyc').checked) {
-            Mensaje('Acepta TyC', 'Para continuar, debes marcar la casilla de términos y condiciones.');
-            return;
-        }
+        const r = await api.entrar(usuario, contrasena);
 
-        if (!cuentaExiste(usuario)) {
+        if (r.ok && comprobarTyC()) {  
+            iniciarSesion(usuario); 
+            return; 
+        }
+        if (r.motivo === 'clave') { 
+            Mensaje('Contraseña incorrecta', 'La contraseña ingresada no es correcta. Intenta de nuevo.');
+            return; 
+        }
+        if (r.motivo === 'no-existe' && comprobarTyC()) {
             abrirCreandoCuenta();
-            return;
         }
-
-        iniciarSesion(usuario)
-
     },
 
-    crearCuenta() {
+    async crearCuenta() {
         if(!confirmarContraseña()) {
             $('creando-cuenta-error').classList.remove('oculto');
             $('password-confirm').focus();
             return;
         }
         $('creando-cuenta-error').classList.add('oculto');
-        
+
+        const usuario = $('user').value.trim().toLowerCase();
+        const contrasena = $('password').value;
+
+        const r = await api.registrar(usuario, contrasena);
+        if(!r.ok) {
+            Mensaje('Error al crear cuenta', 'No se pudo crear la cuenta. Inténtalo de nuevo.', 'imgs/x.png');
+            return;
+        }
+
         cerrar('window-creando-cuenta');
-        crearCuentaDB($('user').value.trim().toLowerCase(), $('password').value);
-        
         iniciarSesion($('user').value.trim().toLowerCase());
         Mensaje('Recuerda tu cuenta', 'Debes recordar tu usuario y contraseña.<br> <b>No hay forma de recuperar tu cuenta si la olvidas.</b>', 'imgs/warning.png');
     },
 
     // ----Dashboard----
 
-    cerrarSesion() {
+    async cerrarSesion() {
+        await api.salir();
+
         estado.usuario = null;
         estado.secretoConsultado = null;
         estado.secretoLeyendo = null;
@@ -345,21 +283,20 @@ const acciones = {
         irA('page-consultar-secretos');
     },
 
-    irLeerSecreto() {
-        if(!puedeLeer()) {
+    async irLeerSecreto() {
+
+        const r = await api.tomarSecreto();
+        if(!r.ok && r.motivo === 'bloqueado') {
             abrir('window-lectura-bloqueada');
             return;
         }
-
-        const secreto = secretoLeido(secretoAleatorio());
-
-        if (secreto === null) {
+        if(!r.ok) {
             Mensaje('Sin secretos', 'No hay secretos de otras personas o ya has leído todos los disponibles. <br> Vuelve más tarde.', 'imgs/warning.png');
             return;
         }
 
-        estado.secretoLeyendo = secreto;
-        document.querySelector('.leer-secre-texto span').textContent = secreto.texto;
+        estado.secretoLeyendo = r.secreto;
+        document.querySelector('.leer-secre-texto span').textContent = r.secreto.texto;
 
         //Reinicia zona de respuesta
 
@@ -371,14 +308,15 @@ const acciones = {
     },
 
     // ----Publicar secreto----
-    publicarSecreto() {
+    async publicarSecreto() {
+
         const secre = $('pub-secre-input').value
         if (!publicacionValida(secre, 20, 3)) {
             Mensaje('Secreto no válido', 'Por favor, escribe más para que tu secreto pueda publicarse.');
             return;
         }
 
-        if (secretoExiste(secre)) {
+        if (await api.secretoExiste(secre)) {
             Mensaje('Secreto ya publicado', 'Este secreto ya se había publicado. Intenta escribir otra cosa.');
             return;
         }
@@ -386,8 +324,14 @@ const acciones = {
         abrir('window-publicando-secreto');
     },
 
-    confirmarPublicar() {
-        guardarSecreto(estado.usuario, $('pub-secre-input').value.trim());
+    async confirmarPublicar() {
+
+        const r = await api.publicarSecreto($('pub-secre-input').value);
+        if(!r.ok) {
+            Mensaje('Error al publicar', 'No se pudo publicar el secreto. Inténtalo de nuevo.', 'imgs/x.png');
+            return;
+        }
+
         reiniciarPubSecreInput();
 
         irA('page-dashboard');
@@ -431,9 +375,14 @@ const acciones = {
         abrir('window-publicando-respuesta');
     },
 
-    confirmarRespuesta() {
-        guardarRespuesta(estado.secretoLeyendo, estado.usuario, $('respuesta-input').value.trim());
-        
+    async confirmarRespuesta() {
+
+        const r = await api.publicarRespuesta(estado.secretoLeyendo.id, $('respuesta-input').value);
+        if(!r.ok) {
+            Mensaje('Error al publicar', 'No se pudo publicar la respuesta. Inténtalo de nuevo.', 'imgs/x.png');
+            return;
+        }
+
         $('responder-secreto').classList.remove('oculto');
         $('respuesta-input').value = '';
         $('responder-secreto-texto').classList.add('oculto');
@@ -456,7 +405,7 @@ const acciones = {
 
 // ------- Eventos ---------------
 
-document.addEventListener('click', (evento) => {
+document.addEventListener('click', async (evento) => {
 
     const button = evento.target.closest('button, a[data-abrir]');
     if(!button) return;
@@ -476,7 +425,15 @@ document.addEventListener('click', (evento) => {
     if('cerrar' in data)    cerrar(button.closest('.emergent-window').id);
     if(data.ir)             irA(data.ir);
     if(data.abrir)          abrir(data.abrir);
-    if(data.accion)         acciones[data.accion]();
+
+    if(data.accion) {
+        try {
+            await acciones[data.accion]();
+        } catch (error) {
+            console.error('Error al ejecutar acción: ', error);
+            Mensaje('Error', 'Ocurrió un problema. Intenta de nuevo.', 'imgs/x.png');
+        }
+    }
 });
 
 const enterKeyAction = document.querySelectorAll('#user, #password, #password-confirm');
@@ -504,7 +461,28 @@ $('pub-secre-input').addEventListener('input', (evento) => {
 })
 
 // ------------ Arranque ---------------
-$('pub-secre-input-limit').textContent = "0 / " + $('pub-secre-input').maxLength;
+function iniciarApp() {
+    $('pub-secre-input-limit').textContent = "0 / " + $('pub-secre-input').maxLength;
 
-document.querySelectorAll('.page, .emergent-window').forEach(el => el.classList.add('oculto'));
-irA('page-inicio');
+    document.querySelectorAll('.page, .emergent-window').forEach(el => el.classList.add('oculto'));
+    irA('page-inicio');
+
+    document.querySelectorAll('textarea, input').forEach(el => {
+        el.value = '';
+    });
+}
+
+iniciarApp();
+
+// ------- Inactividad ------
+const SEGUNDOS_INACTIVIDAD = 180;
+let temporizador;
+
+function reiniciarInactividad() {
+    clearTimeout(temporizador);
+    if (!estado.usuario) return;
+    temporizador = setTimeout(() => acciones.cerrarSesion(), SEGUNDOS_INACTIVIDAD * 1000);
+}
+
+['pointerdown', 'keydown', 'pointermove'].forEach(tipo =>
+    document.addEventListener(tipo, reiniciarInactividad));

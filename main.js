@@ -79,7 +79,7 @@ async function mostrarMenuAdmin() {
             title: 'Administración',
             message: 'Mercado de Secretos',
             detail: 'Elige una opción.',
-            buttons: ['Cancelar', 'Exportar a Excel', 'Respaldar ahora', 'Salir de la aplicación'],
+            buttons: ['Cancelar', 'Exportar a Excel', 'Respaldar ahora', 'Salir de la aplicación', 'DevTools'],
             defaultId: 0,
             cancelId: 0,
             noLink: true
@@ -98,6 +98,8 @@ async function mostrarMenuAdmin() {
         } else if (response === 3) {
             salirPermitido = true;
             app.quit();
+        } else if (response === 4) {
+            ventana.webContents.openDevTools();
         }
     } catch (error) {
         console.error(error);
@@ -148,7 +150,10 @@ function crearVentana() {
 
     // Alt+F4 y cualquier otro intento de cerrar la ventana
     ventana.on('close', (evento) => {
-        if (!salirPermitido) evento.preventDefault();
+        // Si estamos en quiosco, protegemos el cierre; en desarrollo (npm start), dejamos cerrar libremente
+        if (MODO_KIOSCO && !salirPermitido) {
+            evento.preventDefault();
+        }
     });
 
     // Si Windows se apaga o se cierra la sesión, no se estorba
