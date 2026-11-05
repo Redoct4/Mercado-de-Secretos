@@ -39,17 +39,18 @@ function sonarVentana(idVentana) {
             const icono = $(idVentana).querySelector('img').getAttribute('src');
             const nombre = sonidoPorIcono[icono];
 
-            console.log('icono', icono, 'nombre', nombre);
-
             if (nombre) {
                 sonar(nombre);
             } else {
                 sonar('notif');
             }
         }
-    } 
-    if (sonidoPorIcono[idVentana]) {
-        sonar(sonidoPorIcono[idVentana]);
+    } else {
+        if (sonidoPorIcono[idVentana]) {
+            sonar(sonidoPorIcono[idVentana]);
+        } else {
+            sonar('notif');
+        }
     }
     
 }
@@ -119,9 +120,7 @@ function cuentaExiste(usuario) {
     return baseFalsa.cuentas.has(usuario);
 }
 
-function contrasenaCorrecta() {
-    const usuario = $('user').value.toLowerCase();
-    const contrasena = $('password').value
+function contrasenaCorrecta(usuario, contrasena) {
     return baseFalsa.cuentas.get(usuario) === contrasena;
 }
 
@@ -166,8 +165,6 @@ function puedeLeer() {
     const usuario = estado.usuario;
 
     const leidos = baseFalsa.lecturas.get(usuario) ?? new Set();
-    console.log(secretosDe(usuario).length)
-    console.log(leidos.size)
     return secretosDe(usuario).length > leidos.size;
 }
 
@@ -292,7 +289,7 @@ const acciones = {
         }
 
         if (baseFalsa.cuentas.has(usuario)) {
-            if (!contrasenaCorrecta()) {
+            if (!contrasenaCorrecta(usuario, contrasena)) {
                 Mensaje('Contraseña incorrecta', 'La contraseña ingresada no es correcta. Intenta de nuevo.');
                 return;
             }
@@ -339,7 +336,6 @@ const acciones = {
         $('tyc').checked = false;
 
         sonar('logoff');
-        console.log('Sesión cerrada');
 
         irA('page-inicio');
     },
@@ -510,5 +506,5 @@ $('pub-secre-input').addEventListener('input', (evento) => {
 // ------------ Arranque ---------------
 $('pub-secre-input-limit').textContent = "0 / " + $('pub-secre-input').maxLength;
 
-document.querySelectorAll('.page', '.emergent-window').forEach(el => el.classList.add('oculto'));
+document.querySelectorAll('.page, .emergent-window').forEach(el => el.classList.add('oculto'));
 irA('page-inicio');
