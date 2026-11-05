@@ -18,7 +18,7 @@ const sonidoPorIcono = {
     'imgs/x.png': 'error'
 }
 
-let volumen = 0.6;
+let volumen = 1;
 
 function sonar(name) {
 

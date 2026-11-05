@@ -12,9 +12,15 @@
   "type": "commonjs",
   "dependencies": {
     "98.css": "^0.1.21",
-    "sqlite3": "^6.0.1"
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^13.0.3",
+    "exceljs": "^4.4.0"
   },
   "devDependencies": {
+    "@electron/rebuild": "^4.2.1",
     "electron": "^44.5.0"
+  },
+  "allowScripts": {
+    "better-sqlite3@13.0.3": true
   }
 }
