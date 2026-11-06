@@ -171,9 +171,9 @@ function crearVentana() {
 
 
 // ---------- COMUNICACIÓN CON LA PANTALLA (IPC) ----------
-ipcMain.handle('sesion:entrar', (_evento, nombre, clave) => {
+ipcMain.handle('sesion:entrar', (_evento, nombre, clave, tyc) => {
     const r = db.verificarEntrada(nombre, clave);
-    if (r.ok) sesion.usuario = r.usuario;
+    if (r.ok && tyc) sesion.usuario = r.usuario;
     return { ok: r.ok, motivo: r.motivo };
 });
 

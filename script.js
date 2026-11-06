@@ -223,7 +223,7 @@ const acciones = {
 
         
 
-        const r = await api.entrar(usuario, contrasena);
+        const r = await api.entrar(usuario, contrasena, comprobarTyC());
 
         if (r.ok && comprobarTyC()) {  
             iniciarSesion(usuario); 
@@ -440,7 +440,7 @@ document.addEventListener('click', async (evento) => {
 const enterKeyAction = document.querySelectorAll('#user, #password, #password-confirm');
 
 enterKeyAction.forEach(el => {
-    el.addEventListener('keydown', (evento) => {
+    el.addEventListener('keydown', async (evento) => {
         if (evento.key !== 'Enter') return;
         
 
@@ -449,10 +449,23 @@ enterKeyAction.forEach(el => {
             $('password').focus();
         } else if (el.id === 'password') {
             evento.preventDefault();
-            acciones.entrar();
+            
+            try {
+                await acciones.entrar();
+            } catch (error) {
+                console.error('Error al ejecutar acción: ', error);
+                Mensaje('Error', 'Ocurrió un problema. Intenta de nuevo.', 'imgs/x.png');
+            }
+
         } else if (el.id === 'password-confirm') {
             evento.preventDefault();
-            acciones.crearCuenta();
+
+            try {
+                await acciones.crearCuenta();
+            } catch (error) {
+                console.error('Error al ejecutar acción: ', error);
+                Mensaje('Error', 'Ocurrió un problema. Intenta de nuevo.', 'imgs/x.png');
+            }
         }
     });
 });
@@ -482,7 +495,10 @@ let temporizador;
 function reiniciarInactividad() {
     clearTimeout(temporizador);
     if (!estado.usuario) return;
-    temporizador = setTimeout(() => acciones.cerrarSesion(), SEGUNDOS_INACTIVIDAD * 1000);
+    temporizador = setTimeout(() => {
+        if (!$('page-inicio').classList.contains('oculto')) return;
+        acciones.cerrarSesion()
+    }, SEGUNDOS_INACTIVIDAD * 1000);
 }
 
 ['pointerdown', 'keydown', 'pointermove'].forEach(tipo =>

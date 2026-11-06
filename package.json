@@ -14,7 +14,6 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "98.css": "^0.1.21",
     "bcryptjs": "^3.0.3",
     "better-sqlite3": "^13.0.3",
     "exceljs": "^4.4.0"
