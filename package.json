@@ -8,7 +8,7 @@
     "start": "electron .",
     "kiosco": "set KIOSCO=1&& electron .",
     "postinstall": "electron-rebuild",
-    "empaquetar": "electron-packager . MercadoDeSecretos --platform=win32 --arch=x64 --out=dist --overwrite --ignore=<regex>"
+    "empaquetar": "electron-packager . MercadoDeSecretos --platform=win32 --arch=x64 --out=dist --overwrite"
   },
   "keywords": [],
   "author": "",
