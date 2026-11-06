@@ -199,11 +199,9 @@ function reiniciarPubSecreInput(){
 }
 
 function comprobarTyC() {
-    if (!$('tyc').checked) {
-        Mensaje('Acepta TyC', 'Para continuar, debes marcar la casilla de términos y condiciones.');
-        return false;
-    }
-    return true;
+
+    return $('tyc').checked;
+    
 }
 
 
@@ -222,18 +220,23 @@ const acciones = {
         }
 
         
-
-        const r = await api.entrar(usuario, contrasena, comprobarTyC());
-
-        if (r.ok && comprobarTyC()) {  
-            iniciarSesion(usuario); 
-            return; 
-        }
+        const tyc = comprobarTyC();
+        const r = await api.entrar(usuario, contrasena, tyc);
+        
         if (r.motivo === 'clave') { 
             Mensaje('Contraseña incorrecta', 'La contraseña ingresada no es correcta. Intenta de nuevo.');
             return; 
         }
-        if (r.motivo === 'no-existe' && comprobarTyC()) {
+        if (!tyc) {
+            Mensaje('Acepta TyC', 'Para continuar, debes marcar la casilla de términos y condiciones.');
+            return;
+        }
+
+        if (r.ok) {  
+            iniciarSesion(usuario); 
+            return; 
+        }
+        if (r.motivo === 'no-existe') {
             abrirCreandoCuenta();
         }
     },
