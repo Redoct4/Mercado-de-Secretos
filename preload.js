@@ -6,7 +6,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
     // Sesión
-    entrar:            (nombre, clave) => ipcRenderer.invoke('sesion:entrar', nombre, clave),
+    entrar:            (nombre, clave, tyc) => ipcRenderer.invoke('sesion:entrar', nombre, clave, tyc),
     registrar:         (nombre, clave) => ipcRenderer.invoke('sesion:registrar', nombre, clave),
     salir:             ()              => ipcRenderer.invoke('sesion:salir'),
 
