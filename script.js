@@ -274,6 +274,7 @@ const acciones = {
         $('tyc').checked = false;
 
         sonar('logoff');
+        iniciarApp();
 
         irA('page-inicio');
     },
@@ -462,7 +463,7 @@ $('pub-secre-input').addEventListener('input', (evento) => {
 
 // ------------ Arranque ---------------
 function iniciarApp() {
-    $('pub-secre-input-limit').textContent = "0 / " + $('pub-secre-input').maxLength;
+    reiniciarPubSecreInput();
 
     document.querySelectorAll('.page, .emergent-window').forEach(el => el.classList.add('oculto'));
     irA('page-inicio');
