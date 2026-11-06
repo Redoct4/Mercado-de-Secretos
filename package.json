@@ -1,5 +1,5 @@
 {
-  "name": "codigo-app-mercado-de-secretos",
+  "name": "Mercado de Secretos",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "kiosco": "set KIOSCO=1&& electron .",
-    "postinstall": "electron-rebuild"
+    "postinstall": "electron-rebuild",
+    "empaquetar": "electron-packager . MercadoDeSecretos --platform=win32 --arch=x64 --out=dist --overwrite --ignore=<regex>"
   },
   "keywords": [],
   "author": "",
