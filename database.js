@@ -21,7 +21,7 @@ let carpetaDatos = null;
 // ---------- ARRANQUE ----------
 function iniciar() {
     // Documentos/MercadoDeSecretos/  (fácil de encontrar y respaldar)
-    carpetaDatos = 'C:\\MercadoDeSecretos\\datos';
+    carpetaDatos = path.join(app.getPath('documents'), 'MercadoDeSecretos');;
     fs.mkdirSync(path.join(carpetaDatos, 'respaldos'), { recursive: true });
     fs.mkdirSync(path.join(carpetaDatos, 'exportaciones'), { recursive: true });
 
